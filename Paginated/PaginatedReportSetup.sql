@@ -8468,29 +8468,7 @@ PRINT 'PayrollSummary';
                                                @ProcessingMethod = 'RpWorkerCompCost';
             END;
 
-            /* Removed Reports
-
-			
-            --OfficeTaxSummary          
-
-            BEGIN
-
-                EXEC [dbo].[SpImportReportXML] @ReportName = N'OfficeTaxSummary' ,         -- nvarchar(50)          
-                                               @ImageFolderPath = @DatabasePath ,          -- nvarchar(1000)          
-                                               @Filename = N'OfficeTaxSummaryReport.xml' , -- nvarchar(1000)          
-                                               @ProcessingMethod = 'RpOfficeTaxSummary';
-            END;
-			  ----WCCostSummary  
-
-            BEGIN
-
-                EXEC [dbo].[SpImportReportXML] @ReportName = N'WCCostSummary' ,         -- nvarchar(50)  
-                                               @ImageFolderPath = @DatabasePath ,       -- nvarchar(1000)  
-                                               @Filename = N'WCCostSummaryReport.xml' , -- nvarchar(1000)  
-                                               @ProcessingMethod = 'RpWcCostSummary';
-            END;
-			
-			*/
+           
             COMMIT TRANSACTION;
         END TRY
         BEGIN CATCH
