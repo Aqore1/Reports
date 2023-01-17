@@ -182,27 +182,29 @@ AS
 
 
             --Employee merge Report     
-            SELECT @rptParam = '{"report":{"edit":"ReportDetail",
-
-"reportId":0,
-"report":"EmployeeMerge",
-"status":"Active", 
-"description":"This utiliity allows to merge two employee records into a single record in case of duplicate records. The records that are merged are person Id, SSN, company, person tasks, bank account, deductions, benefits, taxes, accruals, and accrual adjustments. The bad employee name will be updated as "FirstName zzzLastName" in our system." ,
-"processingMethod": "UtlEmployeeMerge",
-"categoryListItemId":' + CAST(@UtilityListItemId AS VARCHAR (MAX)) + ',
-"status":"Active",
-"reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
+            SELECT @rptParam = '
+{"report":
+			{"edit":"ReportDetail",
+			"reportId":0,
+			"report":"EmployeeMerge",
+			"status":"Active", 
+			"description":"This utiliity allows to merge two employee records into a single record in case of duplicate records. The records that are merged are person Id, SSN, company, person tasks, bank account, deductions, benefits, taxes, accruals, and accrual adjustments. The bad employee name will be updated as "FirstName zzzLastName" in our system." ,
+			"processingMethod": "UtlEmployeeMerge",
+			"categoryListItemId":' + CAST(@UtilityListItemId AS VARCHAR (MAX))
+                               + ',
+			"status":"Active",
+			"reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
                                + '
-},
+			},
 
-"column":{"edit":"ReportProperty",
-"reportId":0,
+			"column":{"edit":"ReportProperty",
+			"reportId":0,
 
-"columnValueData":[	
+			"columnValueData":[	
 							    
 
 							   
-	  ],
+				  ],
 
 "parameterValueData":[     
 			{"reportParameterId":0,        
@@ -647,8 +649,8 @@ AS
 
 
 
-            
- ---Assignment List       
+
+            ---Assignment List       
             SELECT @rptParam = '{"report":{"edit":"ReportDetail",
 "reportId":0,
 "report":"AssignmentList",
@@ -1028,7 +1030,10 @@ AS
                                + '},        
           {"reportColumnId":0,"column":"ClockOut","alias":"Clock Out","aggregation":"",        
          "dataTypeListItemId":' + CAST(@DateTimeListItemId AS VARCHAR (MAX))
-                               + '}        
+                               + '}   ,
+							   {"reportColumnId":0,"column":"Hours","alias":"Hours","aggregation":"",        
+         "dataTypeListItemId":' + CAST(@DecimalListItemId AS VARCHAR (MAX))
+                               + '} 
                
         ],        
         
@@ -1967,7 +1972,7 @@ AS
 
 
 
-           --EmployeeBankDetail done
+            --EmployeeBankDetail done
             SELECT @rptParam = '{"report":{"edit":"ReportDetail",
 											"reportId":0,
 											"report":"EmployeeBankDetail",
@@ -2142,7 +2147,7 @@ AS
            "reportId":0,        
            "report":"I9Log",        
            "status":"active",        
-           "description":"This report shows the log records including the person who edited(user), date, time,  all edits, and updates of the fields in the I9 form. It can be filtered by a specific person or in the date range provided.",         
+           "description":"This report shows the log records including the person who edited(user), date, time,  all edits, and updates of the fields in the I9 form. It can be filtered by a specific person or in the date range provided.",        
            "processingMethod": "RpI9LogStatic",         
            "categoryListItemId":' + CAST(@LogListItemId AS VARCHAR (MAX))
                                + ' ,     
@@ -3256,7 +3261,8 @@ AS
            "description":"This report shows information filled by employees in the Essential Staff Care enrollment form including declining or acceptance of different plans.",         
            "processingMethod": "RpEssentialStaffCareStatic", 
             "status":"active" ,
-				"categoryListItemId":' + CAST(@EmployeeListItemId AS VARCHAR (MAX)) + ' ,
+				"categoryListItemId":' + CAST(@EmployeeListItemId AS VARCHAR (MAX))
+                               + ' ,
 			"reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
                                + '
             },        
@@ -3546,7 +3552,8 @@ AS
            "status":"active",        
            "description":"This report shows the minimum wage set up on a specific customer worksite.",         
            "processingMethod": "RpMinimumWagebyCustomerWorksiteStatic", 
-		    "category": "Uncategorized",  
+		  "categoryListItemId":' + CAST(@CustomerListItemId AS VARCHAR (MAX))
+                               + ',
             "status":"active"  , 
 			"reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
                                + '      
@@ -3785,7 +3792,7 @@ AS
             SELECT @rptParam = '{"report":{"edit":"ReportDetail",        
            "reportId":0,        
            "report":"EmployeeAssignmentSurvey",  
-		   "category":' + CAST(@EmployeeListItemId AS VARCHAR (MAX))
+		   "categoryListItemId":' + CAST(@EmployeeListItemId AS VARCHAR (MAX))
                                + ',
            "status":"active",        
            "description":"This report shows the records from the employee assignment survey form which was completed by an employee after the end of each assignment.",         
@@ -4204,7 +4211,7 @@ AS
            "description":"This report shows the detailed record of payment by bank file type",         
            "processingMethod": "RpDirectDepositPayStatic",         
            "categoryListItemId":' + CAST(@PayrollListItemId AS VARCHAR (MAX))
-                               + '      ,
+                               + ' ,
             "status":"active",
 			"reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
                                + '
@@ -4268,7 +4275,7 @@ AS
            "status":"active",        
            "description":"This shows the weekly sales YTD bill on a summary as well as detail level.",        
            "processingMethod": "RpWeeklySalesYTDBillStatic", 
-		    "category": ' + CAST(@InvoiceListItemId AS VARCHAR (MAX))
+		    "categoryListItemId": ' + CAST(@InvoiceListItemId AS VARCHAR (MAX))
                                + ',  
             "status":"active"        ,
 			"reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
@@ -4942,7 +4949,7 @@ AS
             SELECT 'PersonEEO';
 
 
-           
+
 
             ---HowHeardOf done
 
@@ -5160,7 +5167,7 @@ AS
             SELECT @rptParam = '{"report":{"edit":"ReportDetail",        
            "reportId":0,        
            "report":"JobInfo",
-		    "category":' + CAST(@JobAssignmentListItemId AS VARCHAR (MAX))
+		    "categoryListItemId":' + CAST(@JobAssignmentListItemId AS VARCHAR (MAX))
                                + ',
            "status":"active",        
            "description":"Job Info Report",         
@@ -5341,7 +5348,8 @@ AS
             EXEC dbo.SpStaticReportIns @Json = @rptParam;
             SELECT 'JobsinJobPortal';
 
-			    --Assessment Report    done    
+
+            --Assessment Report    done    
             SELECT @rptParam = '{"report":{"edit":"ReportDetail",
 
 "reportId":0,
@@ -5428,7 +5436,8 @@ AS
            "operator":"in",         
            "sortOrder":7,        
               "required":1,        
-              "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX)) + '},
+              "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
+                               + '},
 	       {"reportParameterId":0,        
           "description":"Customer",        
            "column":"Customer",       
@@ -5437,8 +5446,7 @@ AS
            "operator":"in",         
            "sortOrder":8,        
               "required":0,        
-              "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
-                               + '}
+              "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX)) + '}
 ],
 
 
@@ -5446,16 +5454,15 @@ AS
             EXEC dbo.SpStaticReportIns @Json = @rptParam;
             SELECT 'Assessment';
 
-
-			--Commission
-			SELECT @rptParam = '{"report":{"edit":"ReportDetail",        
+            --Commission
+            SELECT @rptParam = '{"report":{"edit":"ReportDetail",        
            "reportId":0,        
            "report":"Commission",        
            "status":"active",        
            "description":"Commission Report",         
            "processingMethod": "RpCommissionStatic", 
-		    "category":  ' + CAST(@GrossProfitTransactionListItemId AS VARCHAR (MAX))
-                   + ',  
+		    "categoryListItemId":  ' + CAST(@GrossProfitTransactionListItemId AS VARCHAR (MAX))
+                               + ',  
             "status":"active"        
             },        
         
@@ -5466,22 +5473,22 @@ AS
      
 							   {"reportColumnId":0,"column":"Person","alias":"Person","isGroupped":"1","groupOrder":"1",        
          "dataTypeListItemId":' + CAST(@StringListItemId AS VARCHAR (MAX))
-                   + '},
+                               + '},
 		  {"reportColumnId":0,"column":"Sales","alias":"Sales","aggregation":"sum",        
          "dataTypeListItemId":' + CAST(@MoneyListItemId AS VARCHAR (MAX))
-                   + '},
+                               + '},
           {"reportColumnId":0,"column":"GrossProfit","alias":"Gross Profit","aggregation":"sum",        
          "dataTypeListItemId":' + CAST(@MoneyListItemId AS VARCHAR (MAX))
-                   + '},
+                               + '},
 		{"reportColumnId":0,"column":"GP","alias":"GP %","aggregation":"average",        
          "dataTypeListItemId":' + CAST(@DecimalListItemId AS VARCHAR (MAX))
-                   + '}	,
+                               + '}	,
 		{"reportColumnId":0,"column":"CommissionPercent","alias":"Commission Percent","aggregation":"",        
          "dataTypeListItemId":' + CAST(@DecimalListItemId AS VARCHAR (MAX))
-                   + '},
+                               + '},
 		{"reportColumnId":0,"column":"Commission","alias":"Commission","aggregation":"sum",        
          "dataTypeListItemId":' + CAST(@MoneyListItemId AS VARCHAR (MAX))
-                   + '}
+                               + '}
 
                
         ],        
@@ -5495,7 +5502,7 @@ AS
 									  "sortOrder":1,
 								      "required":1,
 								      "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
-                   + '},
+                               + '},
 							   {"reportParameterId":0,
 									 "description":"Company",
 									  "column":"Company", 
@@ -5504,7 +5511,7 @@ AS
 									  "sortOrder":2,
 								      "required":0,
 								      "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
-                   + '},{"reportParameterId":0,
+                               + '},{"reportParameterId":0,
 							       "description":"Office",
 							        "column":"Office", 
 							        "processingMethod":"RpTblOffice",
@@ -5513,7 +5520,7 @@ AS
 							        "sortOrder":3,
 									"required":0,
 									"dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
-                   + '},
+                               + '},
 							   {"reportParameterId":0,
 									 "description":"User",
 									  "column":"User", 
@@ -5522,7 +5529,7 @@ AS
 									  "sortOrder":4,
 								      "required":0,
 								      "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
-                   + '}	,
+                               + '}	,
 							   {"reportParameterId":0,
 									 "description":"Roll Up to Parent Customer",
 									  "column":"RollUpToParentCustomer", 
@@ -5532,28 +5539,28 @@ AS
 								      "required":0,	 
 									  "defaultValue": "No",
 								      "dataTypeListItemId":' + CAST(@SelectListItemId AS VARCHAR (MAX))
-                   + '}
+                               + '}
 							   
 							   ]        
         },        
         
         "personIds":"' + CAST(@personIds AS VARCHAR (MAX)) + '"}';
-EXEC dbo.SpStaticReportIns @Json = @rptParam;
-SELECT 'Commission';
+            EXEC dbo.SpStaticReportIns @Json = @rptParam;
+            SELECT 'Commission';
 
 
----GrossProfitDetail
-SELECT @rptParam = '{"report":{"edit":"ReportDetail",        
+            ---GrossProfitDetail
+            SELECT @rptParam = '{"report":{"edit":"ReportDetail",        
            "reportId":0,        
            "report":"GrossProfitDetail",        
            "status":"active",        
            "description":"Gross Profit Detail",         
            "processingMethod": "RpGrossProfitDetailStatic",        
 		    "categoryListItemId":' + CAST(@GrossProfitTransactionListItemId AS VARCHAR (MAX))
-                   + ',  
+                               + ',  
             "status":"active" ,
 			"reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                   + '
+                               + '
             },        
         
       "column":{"edit":"ReportProperty",        
@@ -5564,11 +5571,11 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
 		       
          
 {"reportColumnId":0,"column":"TotalHours","alias":"Total Hours","aggregation":"sum","dataTypeListItemId":'
-                   + CAST(@DecimalListItemId AS VARCHAR (MAX))
-                   + '} ,                
+                               + CAST(@DecimalListItemId AS VARCHAR (MAX))
+                               + '} ,                
 {"reportColumnId":0,"column":"Gross","alias":"Gross","aggregation":"sum","dataTypeListItemId":'
-                   + CAST(@MoneyListItemId AS VARCHAR (MAX))
-                   + '}
+                               + CAST(@MoneyListItemId AS VARCHAR (MAX))
+                               + '}
 
 
 
@@ -5587,7 +5594,7 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
          "sortOrder":1,        
          "required":1,        
          "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
-                   + '},
+                               + '},
 				   {"reportParameterId":0,        
          "description":"End Date",        
            "column":"EndDate",         
@@ -5595,7 +5602,7 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
          "sortOrder":2,        
          "required":1,        
          "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
-                   + '},
+                               + '},
 				   {"reportParameterId":0,        
          "description":"Date Type",        
             "column":"DateType",        
@@ -5605,7 +5612,7 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
 		  "defaultValue":"No",   
          "required":1,        
          "dataTypeListItemId":' + CAST(@SelectListItemId AS VARCHAR (MAX))
-                   + '},
+                               + '},
          {"reportParameterId":0,        
                  "description":"Company",        
                   "column":"Company",         
@@ -5614,7 +5621,7 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
                   "sortOrder":4,        
             "required":0,        
             "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
-                   + '},        
+                               + '},        
           {"reportParameterId":0,        
               "description":"Office",        
                "column":"Office",         
@@ -5624,7 +5631,7 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
                "sortOrder":5,        
          "required":0,        
          "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
-                   + '},      
+                               + '},      
              
                     {"reportParameterId":0,        
          "description":"Group By",        
@@ -5634,7 +5641,7 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
          "sortOrder":6,        
          "required":0,        
          "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
-                   + '} ,
+                               + '} ,
              
                     {"reportParameterId":0,        
          "description":"Job Type",        
@@ -5644,7 +5651,7 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
          "sortOrder":7,        
          "required":0,        
          "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
-                   + '} ,
+                               + '} ,
              
                     {"reportParameterId":0,        
          "description":"User Level",        
@@ -5654,7 +5661,7 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
          "sortOrder":8,        
          "required":0,        
          "dataTypeListItemId":' + CAST(@SelectListItemId AS VARCHAR (MAX))
-                   + '},
+                               + '},
              
                     {"reportParameterId":0,        
          "description":"User Type",        
@@ -5665,7 +5672,7 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
          "sortOrder":9,        
          "required":0,        
          "dataTypeListItemId":' + CAST(@SelectListItemId AS VARCHAR (MAX))
-                   + '},
+                               + '},
              
                     {"reportParameterId":0,        
          "description":"User",        
@@ -5675,7 +5682,7 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
          "sortOrder":10,        
          "required":0,        
          "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
-                   + '},
+                               + '},
              
                     {"reportParameterId":0,        
          "description":"Roll Up to Parent Customer",        
@@ -5685,7 +5692,7 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
          "sortOrder":11,        
          "required":0,        
          "dataTypeListItemId":' + CAST(@SelectListItemId AS VARCHAR (MAX))
-                   + '},
+                               + '},
              
                     {"reportParameterId":0,        
          "description":"Customer",        
@@ -5695,28 +5702,28 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
          "sortOrder":12,        
          "required":0,        
          "dataTypeListItemId":' + CAST(@StringListItemId AS VARCHAR (MAX))
-                   + '}
+                               + '}
                  
           ]        
         },        
         
         "personIds":"' + CAST(@personIds AS VARCHAR (MAX)) + '"}';
-EXEC dbo.SpStaticReportIns @Json = @rptParam;
-SELECT 'GrossProfitDetail';
+            EXEC dbo.SpStaticReportIns @Json = @rptParam;
+            SELECT 'GrossProfitDetail';
 
 
---NewCustomerOrderTrackingMetrics
-SELECT @rptParam = '{"report":{"edit":"ReportDetail",
+            --NewCustomerOrderTrackingMetrics
+            SELECT @rptParam = '{"report":{"edit":"ReportDetail",
 "reportId":0,
 "report":"NewCustomerOrderTrackingMetrics",
 "status":"active",
 "description":"New Customer Order Tracking Metrics Report",
 "processingMethod": "RpNewCustomerOrderTrackingMetricsStatic",
  "categoryListItemId":' + CAST(@CustomerListItemId AS VARCHAR (MAX))
-                   + ',
+                               + ',
 "status":"active",
 "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                   + '
+                               + '
 },
 
 "column":{"edit":"ReportProperty",
@@ -5732,7 +5739,7 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
          "sortOrder":1,        
          "required":1,        
          "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
-                   + '},
+                               + '},
 								   {"reportParameterId":0,        
          "description":"EndDate",        
            "column":"EndDate",         
@@ -5740,7 +5747,7 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
          "sortOrder":2,        
          "required":1,        
          "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
-                   + '},
+                               + '},
 
 	 {"reportParameterId":0,        
           "description":"Customer",        
@@ -5749,7 +5756,8 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
            "sortOrder":3,        
               "required":1,        
 			      "defaultValue":"%", 
-              "dataTypeListItemId":' + CAST(@StringListItemId AS VARCHAR (MAX)) + '}	,
+              "dataTypeListItemId":' + CAST(@StringListItemId AS VARCHAR (MAX))
+                               + '}	,
 
 			  
 	 {"reportParameterId":0,        
@@ -5764,22 +5772,22 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
 
 
 "personIds":"' + CAST(@personIds AS VARCHAR (MAX)) + '"}';
-EXEC dbo.SpStaticReportIns @Json = @rptParam;
-SELECT 'NewCustomerOrderTrackingMetrics';
+            EXEC dbo.SpStaticReportIns @Json = @rptParam;
+            SELECT 'NewCustomerOrderTrackingMetrics';
 
 
---WorkInjuryList
-SELECT @rptParam = '{"report":{"edit":"ReportDetail",
+            --WorkInjuryList
+            SELECT @rptParam = '{"report":{"edit":"ReportDetail",
 "reportId":0,
 "report":"WorkInjuryList",
 "status":"active",
 "description":"Work Injury List Report",
 "processingMethod": "RpWorkInjuryListStatic",
  "categoryListItemId":' + CAST(@WorkInjuryListItemId AS VARCHAR (MAX))
-                   + ',
+                               + ',
 "status":"active",
 "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                   + '
+                               + '
 },
 
 "column":{"edit":"ReportProperty",
@@ -5800,7 +5808,7 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
          "sortOrder":1,        
          "required":1,        
          "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
-                   + '},
+                               + '},
 								   {"reportParameterId":0,        
          "description":"Incident End Date",        
            "column":"IncidentEndDate",         
@@ -5808,7 +5816,7 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
          "sortOrder":2,        
          "required":1,        
          "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
-                   + '},
+                               + '},
 
 
 {"reportParameterId":0,        
@@ -5819,7 +5827,7 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
                   "sortOrder":3,        
             "required":0,        
             "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
-                   + '},        
+                               + '},        
           {"reportParameterId":0,        
               "description":"Office",        
                "column":"Office",         
@@ -5832,24 +5840,24 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
 
  
 "personIds":"' + CAST(@personIds AS VARCHAR (MAX)) + '"}';
-EXEC dbo.SpStaticReportIns @Json = @rptParam;
-SELECT 'WorkInjuryList';
+            EXEC dbo.SpStaticReportIns @Json = @rptParam;
+            SELECT 'WorkInjuryList';
 
 
---TaskList
-SELECT @rptParam = '{"report":{"edit":"ReportDetail",
+            --TaskList
+            SELECT @rptParam = '{"report":{"edit":"ReportDetail",
 											"reportId":0,
 											"report":"TaskList",
 											"status":"Active",
 											"description":"This report shows the list of task assigned to a user in a given range.", 
 											"processingMethod": "RpTaskListStatic",
 											 "categoryListItemId":'
-                   + CAST(@RecruitingOnboardingListItemId AS VARCHAR (MAX))
-                   + ' , 
+                               + CAST(@RecruitingOnboardingListItemId AS VARCHAR (MAX))
+                               + ' , 
 											 "status":"Active",
 											 "reportOptionListItemId":'
-                   + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                   + '
+                               + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
+                               + '
 											 },
 
 						"column":{"edit":"ReportProperty",
@@ -5865,7 +5873,7 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
          "sortOrder":1,        
          "required":1,        
          "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
-                   + '},
+                               + '},
 				    {"reportParameterId":0,
 							       "description":"RelatesTo",
 							        "column":"RelatesTo", 
@@ -5875,7 +5883,7 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
 							        "sortOrder":2,
 									"required":1,
 									"dataTypeListItemId":' + CAST(@SelectListItemId AS VARCHAR (MAX))
-                   + '},
+                               + '},
 							   {"reportParameterId":0,
 							       "description":"Relates To Name/Id/Number",
 							        "column":"RelatesToName",
@@ -5883,7 +5891,7 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
 							        "sortOrder":3,
 									"required":0,
 									"dataTypeListItemId":' + CAST(@StringListItemId AS VARCHAR (MAX))
-                   + '},
+                               + '},
 		 {"reportParameterId":0,        
           "description":"Company",        
            "column":"Company",         
@@ -5892,7 +5900,7 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
            "sortOrder":4,        
               "required":0,        
               "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
-                   + '},        
+                               + '},        
           {"reportParameterId":0,        
               "description":"Office",        
                "column":"Office",         
@@ -5902,7 +5910,7 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
                "sortOrder":5,        
          "required":0,        
          "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
-                   + '},        
+                               + '},        
            {"reportParameterId":0,        
               "description":"Task Template",        
                "column":"TaskTemplate",         
@@ -5911,7 +5919,7 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
                "sortOrder":6,        
          "required":0,        
          "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
-                   + '},
+                               + '},
 				    {"reportParameterId":0,        
               "description":"Task Status",        
                "column":"TaskStatus",         
@@ -5920,26 +5928,26 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
                "sortOrder":7,        
          "required":0,        
          "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
-                   + '}
+                               + '}
 				   ]
 								},
 								"personIds":"' + CAST(@personIds AS VARCHAR (MAX)) + '"}';
-EXEC dbo.SpStaticReportIns @Json = @rptParam;
-SELECT 'TaskList';
+            EXEC dbo.SpStaticReportIns @Json = @rptParam;
+            SELECT 'TaskList';
 
 
---UserRole
-SELECT @rptParam = '{"report":{"edit":"ReportDetail",        
+            --UserRole
+            SELECT @rptParam = '{"report":{"edit":"ReportDetail",        
            "reportId":0,        
            "report":"UserRole",        
            "status":"active",        
            "description":"User Role",         
-           "processingMethod": "RpUserRole",         
+           "processingMethod": "RpUserRoleStatic",         
            "categoryListItemId":' + CAST(@AdminListItemId AS VARCHAR (MAX))
-                   + '  ,
+                               + '  ,
             "status":"active",
             "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                   + '
+                               + '
             },        
 
 			   "column":{"edit":"ReportProperty",        
@@ -5948,14 +5956,14 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
         "columnValueData":[
         {"reportColumnId":0,"column":"Entity","alias":"Entity","aggregation":"groupby",
                               "dataTypeListItemId":' + CAST(@StringListItemId AS VARCHAR (MAX))
-                   + '} ,
+                               + '} ,
 				   {"reportColumnId":0,"column":"EntityName","alias":"Entity Name",
 				   "aggregation":"groupby",
                               "dataTypeListItemId":' + CAST(@StringListItemId AS VARCHAR (MAX))
-                   + '}  ,
+                               + '}  ,
 				   {"reportColumnId":0,"column":"UTCommission","alias":"UT Commission", 
                               "dataTypeListItemId":' + CAST(@MoneyListItemId AS VARCHAR (MAX))
-                   + '} 
+                               + '} 
 
                 
        ],        
@@ -5970,7 +5978,7 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
                "sortOrder":1,        
          "required":0,        
          "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
-                   + '}   ,  
+                               + '}   ,  
                
           {"reportParameterId":0,        
           "description":"User Role",        
@@ -5980,38 +5988,38 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
            "sortOrder":2,        
               "required":0,        
               "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
-                   + '},        
+                               + '},        
           {"reportParameterId":0,        
               "description":"UserRole Name",        
                "column":"UserRoleName",         
-               "processingMethod":"RpTblUserRoleName",           
+               "processingMethod":"RpTblUser",           
                "operator":"in",         
                "sortOrder":3,        
          "required":1,        
          "dataTypeListItemId":' + CAST(@SelectListItemId AS VARCHAR (MAX))
-                   + '}
+                               + '}
                
           ]        
         },        
         
         "personIds":"' + CAST(@personIds AS VARCHAR (MAX)) + '"}';
 
-EXEC dbo.SpStaticReportIns @Json = @rptParam;
-SELECT 'UserRole';
+            EXEC dbo.SpStaticReportIns @Json = @rptParam;
+            SELECT 'UserRole';
 
 
---TransactionItemByCategory
-SELECT @rptParam = '{"report":{"edit":"ReportDetail",        
+            --TransactionItemByCategory
+            SELECT @rptParam = '{"report":{"edit":"ReportDetail",        
 									                "reportId":0,        
 									                "report":"TransactionItemByCategory",        
 									                "status":"active",        
 									                "description":"Transaction Item By Category",         
 									                "processingMethod": "RpTransactionItemByCategoryStatic",        
 									                 "status":"active"   ,
-													   "categoryListItemId":' + CAST(@TimesheetListItemId AS VARCHAR (MAX))
-                               + ',
+													   "categoryListItemId":'
+                               + CAST(@TimesheetListItemId AS VARCHAR (MAX)) + ',
 					"reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                   + '     
+                               + '     
 									                 },        
 									             
 									           "column":{"edit":"ReportProperty",        
@@ -6020,16 +6028,16 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
 									             "columnValueData":[
 												  {"reportColumnId":0,"column":"ItemPay","alias":"Item Pay","aggregation":"sum",        
          "dataTypeListItemId":' + CAST(@MoneyListItemId AS VARCHAR (MAX))
-                   + '} ,        
+                               + '} ,        
            {"reportColumnId":0,"column":"ItemBill","alias":"Item Bill","aggregation":"sum",        
          "dataTypeListItemId":' + CAST(@MoneyListItemId AS VARCHAR (MAX))
-                   + '} ,{"reportColumnId":0,"column":"PayUnit","alias":"Pay Unit","aggregation":"sum",        
+                               + '} ,{"reportColumnId":0,"column":"PayUnit","alias":"Pay Unit","aggregation":"sum",        
          "dataTypeListItemId":' + CAST(@DecimalListItemId AS VARCHAR (MAX))
-                   + '} ,{"reportColumnId":0,"column":"BillUnit","alias":"Bill Unit","aggregation":"sum",        
+                               + '} ,{"reportColumnId":0,"column":"BillUnit","alias":"Bill Unit","aggregation":"sum",        
          "dataTypeListItemId":' + CAST(@DecimalListItemId AS VARCHAR (MAX))
-                   + '} ,{"reportColumnId":0,"column":"AccountingPeriod","alias":"Accounting Period","aggregation":"",        
+                               + '} ,{"reportColumnId":0,"column":"AccountingPeriod","alias":"Accounting Period","aggregation":"",        
          "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
-                   + '} 
+                               + '} 
 												 ],        
 									             
 									                    
@@ -6041,7 +6049,7 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
 								 "sortOrder":1,
 								 "required":1,
 								 "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
-                   + '},
+                               + '},
 							  {"reportParameterId":0,
 									 "description":"Company",
 									  "column":"Company", 
@@ -6050,7 +6058,7 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
 									  "sortOrder":2,
 								      "required":0,
 								      "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
-                   + '},
+                               + '},
 							   {"reportParameterId":0,        
               "description":"Office",        
                "column":"Office",         
@@ -6060,7 +6068,7 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
                "sortOrder":3,        
          "required":0,        
          "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
-                   + '}	,{"reportParameterId":0,        
+                               + '}	,{"reportParameterId":0,        
          "description":"Pay Code Category",        
             "column":"PayCodeCategory",         
          "operator":"equal",  
@@ -6068,15 +6076,53 @@ SELECT @rptParam = '{"report":{"edit":"ReportDetail",
          "sortOrder":4,        
          "required":0,        
          "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
-                   + '} 
+                               + '} 
 							   
 							   ]        
 									                       
 									               },        
 									             
 									             "personIds":"' + CAST(@personIds AS VARCHAR (MAX)) + '"}';
-EXEC dbo.SpStaticReportIns @Json = @rptParam;
-SELECT 'TransactionItemByCategory';
+            EXEC dbo.SpStaticReportIns @Json = @rptParam;
+            SELECT 'TransactionItemByCategory';
+
+            --CustomerSetup
+            SELECT @rptParam = '{"report":{"edit":"ReportDetail",        
+           "reportId":0,        
+           "report":"CustomerSetup",
+		    "category":' + CAST(@CustomerListItemId AS VARCHAR (MAX))
+                               + ',
+           "status":"active",        
+           "description":"Gives the Information about the setup of the customer",         
+           "processingMethod": "RpCustomerSetupStatic",        
+            "status":"active",
+			"reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
+                               + '
+            },        
+        
+      "column":{"edit":"ReportProperty",        
+       "reportId":0,        
+        
+        "columnValueData":[ 
+		{"reportColumnId":0,"column":"LastInvoiceDate","alias":"Last Invoice Date","aggregation":"", 
+         "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
+                               + '},
+								   {"reportColumnId":0,"column":"FirstInvoiceDate","alias":"First Invoice Date","aggregation":"",    
+         "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
+                               + '},
+		{"reportColumnId":0,"column":"LastCommentDate","alias":"Last Comment Date","aggregation":"",        
+         "dataTypeListItemId":' + CAST(@DateTimeListItemId AS VARCHAR (MAX))
+                               + '}
+								   ],        
+        
+               
+       "parameterValueData":[]
+                  
+          },        
+        
+        "personIds":"' + CAST(@personIds AS VARCHAR (MAX)) + '"}';
+            EXEC dbo.SpStaticReportIns @Json = @rptParam;
+            SELECT 'CustomerSetup';
 
 
 
