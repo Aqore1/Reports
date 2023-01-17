@@ -332,14 +332,12 @@ AS
                 EXEC dbo.[SpPaginatedReportSetupIns] @Json = @Json;
                 PRINT 'ARAging';
 
+				--ARBatch
                 SELECT @Json = '{"report" :"ARBatch",
 					"description" :"This reports prints after posting of AR payment batch. It includes all the payments in a batch and also be run for specific customers in a given a date range.",
-					"categoryListItemId":' + CAST(@AccountsReceivableListItemId AS VARCHAR (MAX))
-                               + ',
-					"reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',
-					"statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + ' ,
+					"categoryListItemId":' + CAST(@AccountsReceivableListItemId AS VARCHAR (MAX))+ ',
+					"reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))+ ',
+					"statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))+ ' ,
 							     
 	  "reportOptionListItemId":' + CAST(@ReportOptionApplicationAndShareableListItemId AS VARCHAR (MAX))
                                + ',
@@ -595,7 +593,7 @@ AS
         "sortOrder":7,        
            "operator":"equals",         
          "required":0,                   
-           "defaultValue":[{"key":"SortOrder1","value":"FirstName,LastName","isParameter":1}]        
+           "defaultValue":[{"key":"SortOrder1","value":"CheckNumber","isParameter":1}]        
          },
 		 {         
                  
@@ -849,8 +847,7 @@ AS
                 SELECT @Json = '{"report" :"PayrollJournal",        
      "description" :"This report shows all paychecks in a given date range that includes a summarized level of transactions, taxes, contributions, deductions, accruals, and bank information. It can be further filtered in summary only level.",    
 	 "categoryListItemId":' + CAST(@AccountingGLListItemId AS VARCHAR (10)) + ',
-     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',        
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + ',        
      "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ' ,       
 	  "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
                                + ',      
@@ -1200,10 +1197,8 @@ AS
                 SELECT @Json = '{"report" :"PersonResume",        
      "description" :"This report generates the resume for the person that includes skill, employment, education, interview as per the records in the Zenople.",     
 	 "categoryListItemId":' + CAST(@EmployeeListItemId AS VARCHAR (10)) + ',
-     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',        
-     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + ',           
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + ',        
+     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))+ ',           
 	  "reportOptionListItemId":' + CAST(@ReportOptionApplicationAndShareableListItemId AS VARCHAR (MAX))
                                + ', 
                   
@@ -1540,7 +1535,7 @@ AS
         "sortOrder":7,        
            "operator":"equals",         
          "required":0,                   
-           "defaultValue":[{"key":"SortOrder1","value":"FirstName,LastName","isParameter":1}]        
+           "defaultValue":[{"key":"SortOrder1","value":"CheckNumber","isParameter":1}]        
          },
 		 {         
                  
@@ -1595,12 +1590,9 @@ AS
                 --TransactionBatch
                 SELECT @Json = '{"report" :"TransactionBatch",          
         "description" :"This report shows detailed timesheet information including hours, transaction code, units, and margin. This report can also be used to verify, confirm, and process transactions.", 
-		"categoryListItemId":' + CAST(@TimesheetListItemId AS VARCHAR (MAX))
-                               + ',      
-        "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',          
-        "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + ' ,       
+		"categoryListItemId":' + CAST(@TimesheetListItemId AS VARCHAR (MAX)) + ',      
+        "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + ',          
+        "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))  + ' ,       
 			  "reportOptionListItemId":' + CAST(@ReportOptionApplicationAndShareableListItemId AS VARCHAR (MAX))
                                + ',
                        
@@ -1748,8 +1740,7 @@ AS
                 --AgencyPaycheck
                 SELECT @Json = '{"report" :"AgencyPayCheck",        
      "description" :"This is a check designed which is used to pay the agencies.",        
-     "reportTypeListItemId":' + CAST(@PayCheckStyleReportTypeListItemId AS VARCHAR (10))
-                               + ',     
+     "reportTypeListItemId":' + CAST(@PayCheckStyleReportTypeListItemId AS VARCHAR (10))+ ',     
 	 "categoryListItemId":' + CAST(@AccountsPayableListItemId AS VARCHAR (MAX)) + ',
      "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ' ,      
 	  "reportOptionListItemId":' + CAST(@ReportOptionApplicationListItemId AS VARCHAR (MAX))
@@ -1870,8 +1861,7 @@ AS
                 SELECT @Json = '{"report" :"DeductionSubmittal",        
      "description" :"This report shows all deductions that were paid to the agencies along with employee information and case information/reference. It is designed to be submitted along with the agency check that was generated.",   
 	 "categoryListItemId":' + CAST(@AccountsPayableListItemId AS VARCHAR (MAX)) + ',  
-     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',        
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))+ ',        
      "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ' ,      
 	  "reportOptionListItemId":' + CAST(@ReportOptionApplicationListItemId AS VARCHAR (MAX))
                                + ',       
@@ -2003,8 +1993,7 @@ AS
                 --Please dont change the name of TaskReport , this name is used in UI so it will affect the report execution.
                 SELECT @Json = ' {"report" :"TaskReport",        
      "description" :"This report lists out all the tasks shown on the screen for printing purposes based on the filters.",        
-     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',        
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))  + ',        
           "categoryListItemId":' + CAST(@CommonListItemId AS VARCHAR (10)) + ',        
      "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ' ,         
 	  "reportOptionListItemId":' + CAST(@ReportOptionApplicationListItemId AS VARCHAR (MAX))
@@ -2051,8 +2040,7 @@ AS
                 ---Statement Report        
                 SELECT @Json = '[ {"report" :"Statement",          
      "description" :"This report shows all invoices with open balances grouped by the customer. It can further be filtered for a specific customer. It can also be filtered to only show past due.",           
-     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',          
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + ',          
           "categoryListItemId":' + CAST(@InvoiceListItemId AS VARCHAR (10)) + ',          
      "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ' ,  
 		"reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
@@ -2143,13 +2131,9 @@ AS
                 SELECT @Json = '{"report" :"Invoice",        
      "description" :"This report is an invoice statement provided to the customer for all the transactions done during the billing period.",     
 	 "categoryListItemId":' + CAST(@InvoiceListItemId AS VARCHAR (10)) + ',
-     "reportTypeListItemId":' + CAST(@InvoiceStyleReportTypeListItemId AS VARCHAR (10))
-                               + ',        
-     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + ',        
-                   
-	  "reportOptionListItemId":' + CAST(@ReportOptionApplicationListItemId AS VARCHAR (MAX))
-                               + ',
+     "reportTypeListItemId":' + CAST(@InvoiceStyleReportTypeListItemId AS VARCHAR (10)) + ',        
+     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ',                           
+	  "reportOptionListItemId":' + CAST(@ReportOptionApplicationListItemId AS VARCHAR (MAX)) + ',
      "reportParameter":[        
            {         
                  
@@ -2232,11 +2216,9 @@ AS
                 SELECT @Json = '{"report" :"InvoicewithJobPosition",        
      "description" :"This report is an invoice statement provided to the customer for all the transactions done during the billing period with the job title.",
 	 "categoryListItemId":' + CAST(@InvoiceListItemId AS VARCHAR (10)) + ',        
-     "reportTypeListItemId":' + CAST(@InvoiceStyleReportTypeListItemId AS VARCHAR (10))
-                               + ',        
+     "reportTypeListItemId":' + CAST(@InvoiceStyleReportTypeListItemId AS VARCHAR (10))+ ',        
      "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ',        
-	  "reportOptionListItemId":' + CAST(@ReportOptionApplicationListItemId AS VARCHAR (MAX))
-                               + ', 
+	  "reportOptionListItemId":' + CAST(@ReportOptionApplicationListItemId AS VARCHAR (MAX)) + ', 
                   
      "reportParameter":[        
            {         
@@ -2320,15 +2302,10 @@ AS
                 --WorkerCompCostWithHours
                 SELECT @Json = '{"report" :"WorkerCompCostWithHours",          
      "description" :"This report shows total worker comp wages, rates, and costs with hours.",          
-     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',          
-          "categoryListItemId":' + CAST(@AccountingGLListItemId AS VARCHAR (10))
-                               + ',          
-     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + ' ,          
-                     
-	  "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                               + ',
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + ',          
+          "categoryListItemId":' + CAST(@AccountingGLListItemId AS VARCHAR (10)) + ',          
+     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ' ,                               
+	  "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))+ ',
      "reportParameter":[   
 	 {         
                  
@@ -2442,8 +2419,7 @@ AS
                 --AccruedHours
                 SELECT @Json = '{"report" :"AccruedHours",          
 "description" :"This report shows the total hours per employee in a given date range. This report can be further filtered to show accrued hours for the specific client, or specific employee. This report could be used to identify the employee benefits based on accrued hours.",          
-     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',          
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))+ ',          
   "categoryListItemId":' + CAST(@PayrollListItemId AS VARCHAR (MAX)) + ',   
   "isSytem":      ' + CAST(1 AS VARCHAR (10)) + ' ,
      "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ' ,      
@@ -2614,7 +2590,7 @@ AS
                 PRINT 'AccruedHours';
 
 
-                   --DeductionSummary
+                --DeductionSummary
                 SELECT @Json = '{"report" :"DeductionSummary",          
          "description" :"This report shows employees'' deductions in a given date range at a summary level.",      
 		 "categoryListItemId":' + CAST(@PayrollListItemId AS VARCHAR (MAX)) + ',
@@ -2766,14 +2742,10 @@ AS
                 --BenefitSummary
                 SELECT @Json = ' {"report" :"BenefitSummary",          
          "description" :"This report shows employer benefit contribution amounts grouped by benefit code in a given date range at a summary level.", 
-		 "categoryListItemId":' + CAST(@PayrollListItemId AS VARCHAR (MAX))
-                               + ',       
-         "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',          
-         "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + ',         
-	  "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                               + ',      
+		 "categoryListItemId":' + CAST(@PayrollListItemId AS VARCHAR (MAX))+ ',       
+         "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + ',          
+         "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ',         
+	  "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX)) + ',      
                         
          "reportParameter":[          
                {           
@@ -2886,6 +2858,8 @@ AS
             }'  ;
                 EXEC dbo.SpPaginatedReportSetupIns @Json = @Json;
                 PRINT 'BenefitSummaryReport';
+
+
                 --InvoiceRegister
                 SELECT @Json = '{"report" :"InvoiceRegister",        
      "description" :"This report shows detailed invoice information generated in a given date range along with discounts, charges, invoice amount, payment amount, and balance.", 
@@ -3010,7 +2984,6 @@ AS
                 PRINT 'InvoiceRegister';
 
 
-             
                 --PaymentDeduction
                SELECT @Json = '{"report" :"PaymentDeduction",        
      "description" :"This report shows the deduction amount withheld from an employee''s paycheck. It includes agency information and case information/references for the given date range.",    
@@ -3183,13 +3156,12 @@ AS
 EXEC dbo.[SpPaginatedReportSetupIns] @Json = @Json; -- varchar(max)        
 PRINT 'PaymentDeduction';
 
+
                 --EmployeeWageStatement
                 SELECT @Json = '{"report" :"EmployeeWageStatement",          
          "description" :"This report shows the wage details of all payments received by an employee within a date range. It can be used for wage verification purposes.", 
-		 "categoryListItemId":' + CAST(@PayrollListItemId AS VARCHAR (MAX))
-                               + ',        
-         "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',          
+		 "categoryListItemId":' + CAST(@PayrollListItemId AS VARCHAR (MAX)) + ',        
+         "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))  + ',          
          "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ',      
 	  "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
                                + ',        
@@ -3325,14 +3297,10 @@ PRINT 'PaymentDeduction';
                 --Management
                 SELECT @Json = '{"report" :"Management",          
          "description" :"This report shows the overall summary of a company which includes financial, payroll, sales, and tax records that are broken down into the company and office level.", 
-		 "categoryListItemId":' + CAST(@GrossProfitTransactionListItemId AS VARCHAR (MAX))
-                               + ',        
-         "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',          
-         "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + ' ,       
-	  "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                               + ',       
+		 "categoryListItemId":' + CAST(@GrossProfitTransactionListItemId AS VARCHAR (MAX)) + ',        
+         "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + ',          
+         "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ' ,       
+	  "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX)) + ',       
                              
          "reportParameter":[          
                {           
@@ -3435,13 +3403,10 @@ PRINT 'PaymentDeduction';
                 --Gross Profit         
                 SELECT @Json = '{"report" :"GrossProfit",          
      "description" :"This report is a summary report that shows gross profit and detailed information of the gross profit broken down by each office.",          
-     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',          
-          "categoryListItemId":' + CAST(@GrossProfitTransactionListItemId AS VARCHAR (MAX))
-                               + ',          
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + ',          
+          "categoryListItemId":' + CAST(@GrossProfitTransactionListItemId AS VARCHAR (MAX)) + ',          
      "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ' ,     
-	  "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                               + ',      
+	  "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))   + ',      
                     
      "reportParameter":[ 
 	 {         
@@ -3544,11 +3509,9 @@ PRINT 'PaymentDeduction';
                 SELECT @Json = '{"report" :"StartSheet",        
  "description" :"This report shows details of employee assignment with rates, their contact information, and worksite address.",  
  "categoryListItemId":' + CAST(@JobAssignmentListItemId AS VARCHAR (10)) + ',   
- "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',        
+ "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + ',        
  "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ',      
-	  "reportOptionListItemId":' + CAST(@ReportOptionApplicationAndShareableListItemId AS VARCHAR (MAX))
-                               + ',  
+	  "reportOptionListItemId":' + CAST(@ReportOptionApplicationAndShareableListItemId AS VARCHAR (MAX)) + ',  
   "reportParameter":[        
        {         
         
@@ -3603,12 +3566,9 @@ PRINT 'PaymentDeduction';
                 SELECT @Json = '{"report" :"TransactionBatchDetail",          
         "description" :"This report shows detailed timesheet information including hours, transaction code, units, and margin. This report can also be used to verify, confirm, and process transactions.",   
 		"categoryListItemId":' + CAST(@TimesheetListItemId AS VARCHAR (MAX)) + ', 
-        "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',          
-        "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + ' ,       
-			  "reportOptionListItemId":' + CAST(@ReportOptionApplicationAndShareableListItemId AS VARCHAR (MAX))
-                               + ',
+        "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))+ ',          
+        "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ' ,       
+			  "reportOptionListItemId":' + CAST(@ReportOptionApplicationAndShareableListItemId AS VARCHAR (MAX)) + ',
                        
         "reportParameter":[          
               {           
@@ -3754,14 +3714,10 @@ PRINT 'PaymentDeduction';
                 ---WCCostSummarybyCustomer        
                 SELECT @Json = '{"report" :"WCCostSummarybyCustomer",    
        "description" :"This report shows total worker comp wages, rates, and costs grouped by customer.",    
-       "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',    
-            "categoryListItemId":' + CAST(@AccountingGLListItemId AS VARCHAR (10))
-                               + ',    
-       "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + ' ,    
-					   "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                               + ',
+       "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + ',    
+            "categoryListItemId":' + CAST(@AccountingGLListItemId AS VARCHAR (10)) + ',    
+       "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))+ ' ,    
+					   "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX)) + ',
 
        "reportParameter":[    
        {     
@@ -3877,12 +3833,9 @@ PRINT 'PaymentDeduction';
                 SELECT @Json = '{"report" :"InvoiceTimeSheet",        
      "description" :"This report shows timeclock punch information related to an invoice for their punch in, punch out, break-in, break-out information.",     
 	 "categoryListItemId":' + CAST(@TimesheetListItemId AS VARCHAR (MAX)) + ',
-     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',        
-     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + ',        
-                  	  "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                               + ',
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + ',        
+     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ',        
+      "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX)) + ',
                     
      "reportParameter":[        
            {         
@@ -3982,14 +3935,10 @@ PRINT 'PaymentDeduction';
                 --Report not needed for ESSG
                 SELECT @Json = '{"report" :"GrossProfitDetail",            
      "description" :"This report shows gross profit and information that makes up the gross profit. It can be further filtered with a  group by office/User/Customer/Job Type/WC Code/ Employee to see detail and summary.",            
-     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',            
-          "categoryListItemId":' + CAST(@GrossProfitTransactionListItemId AS VARCHAR (MAX))
-                               + ',            
-     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + ' ,            
-                      	  "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                               + ',
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + ',            
+      "categoryListItemId":' + CAST(@GrossProfitTransactionListItemId AS VARCHAR (MAX)) + ',            
+     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ' ,            
+      "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))+ ',
                     
      "reportParameter":[{  
   
@@ -4201,14 +4150,10 @@ PRINT 'PaymentDeduction';
                 --UnappliedCash
                 SELECT @Json = '{"report" :"UnappliedCash",
 					"description" :"This report shows all the unapplied cash/credits per customer that are remaining.",
-					"categoryListItemId":' + CAST(@AccountsReceivableListItemId AS VARCHAR (MAX))
-                               + ',
-					"reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',
-					"statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + ' ,	  
-						   "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                               + ',
+					"categoryListItemId":' + CAST(@AccountsReceivableListItemId AS VARCHAR (MAX))+ ',
+					"reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))+ ',
+					"statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))+ ' ,	  
+					"reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))+ ',
                     
 					"reportParameter":[
 							    { 
@@ -4322,12 +4267,11 @@ PRINT 'PaymentDeduction';
 
                 ---New Hire report--------
                 SELECT @Json = N'{"report" :"NewHire",
-"description" :"This report shows the list of employees who received their first check in the provided date range. It will also include any employees who may not have received any checks for at least the number of consecutive days provided in the number of days parameter.",
-"categoryListItemId":' + CAST(@RecruitingOnboardingListItemId AS VARCHAR (MAX)) + ',
-"reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + N',
-"statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + N' ,	
-							   "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                               + ',
+					"description" :"This report shows the list of employees who received their first check in the provided date range. It will also include any employees who may not have received any checks for at least the number of consecutive days provided in the number of days parameter.",
+					"categoryListItemId":' + CAST(@RecruitingOnboardingListItemId AS VARCHAR (MAX)) + ',
+					"reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + N',
+					"statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + N' ,	
+					"reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX)) + ',
                     
 
 "reportParameter":[
@@ -4471,12 +4415,9 @@ PRINT 'PaymentDeduction';
                 SELECT @Json = '{"report" :"DeductionSubmittalbyOffice",        
      "description" :"This report shows all deductions that were paid to the agencies along with employee information and case information/reference broken down by Office. It is designed to be submitted along with the agency check that was generated.",  
 	 "categoryListItemId":' + CAST(@AccountsPayableListItemId AS VARCHAR (MAX)) + ',   
-     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',        
-     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + '    , 
-							   	  "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                               + ',
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))+ ',        
+     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + '    , 
+	"reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))+ ',
                     
     
       "reportParameter":[        
@@ -4622,13 +4563,10 @@ PRINT 'PaymentDeduction';
                 -- Migration Summary Report
                 SELECT @Json = N'{"report" :"MigrationSummary",  
      "description" :"This report shows the summary of migrated employee including count of employee, customer, job, assignment, comment and benefit, deduction, tax amount, taxable gross, net, gross of last 6 years and invoice amount, total bill, sales tax, discount, charge, balance of customer and tax amount, taxable gross, gross, balance of tenant organization quarterly.",  
-     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + N',  
-          "categoryListItemId":' + CAST(@AdminListItemId AS VARCHAR (MAX)) + ',  
-     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + N' ,  
-            	  "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                               + ',
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + N',  
+       "categoryListItemId":' + CAST(@AdminListItemId AS VARCHAR (MAX)) + ',  
+     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))+ N' ,  
+	 "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX)) + ',
                     
      "reportParameter":[ 
 	 { 
@@ -4687,14 +4625,10 @@ PRINT 'PaymentDeduction';
                 --ClientBilling
                 SELECT @Json = '{"report" :"ClientBilling",          
         "description" :"This report shows all detailed billing transactions of customers with a total billed amount, bill unit, and count of invoice and employee. It can be filtered by a specific customer, job title and also can be seen as a summary report.",   
-		"categoryListItemId":' + CAST(@GrossProfitTransactionListItemId AS VARCHAR (MAX))
-                               + ',  
-        "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',   
-			   "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                               + ',
-        "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + ' ,          
+		"categoryListItemId":' + CAST(@GrossProfitTransactionListItemId AS VARCHAR (MAX)) + ',  
+        "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + ',   
+		"reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX)) + ',
+        "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ' ,          
                        
         "reportParameter":[          
               {           
@@ -4864,12 +4798,9 @@ PRINT 'PaymentDeduction';
                 SELECT @Json = '{"report" :"Comment",          
         "description" :"This report shows the all comments. It can be further filtered by a specific employee/ customer/ contact/ job/ assignment and date range.",      
 		"categoryListItemId":' + CAST(@CommonListItemId AS VARCHAR (10)) + ',
-        "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',  
-		 "reportOptionListItemId":' + CAST(@ReportOptionApplicationAndShareableListItemId AS VARCHAR (MAX))
-                               + ',
-        "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + ' ,          
+        "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + ',  
+		 "reportOptionListItemId":' + CAST(@ReportOptionApplicationAndShareableListItemId AS VARCHAR (MAX))+ ',
+        "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ' ,          
                        
         "reportParameter":[          
               {                                 
@@ -5049,12 +4980,9 @@ PRINT 'PaymentDeduction';
                 SELECT @Json = '{"report" :"EmployeeSummary",        
      "description" :"This report shows the information of a specific employee including their assignments, skills, educations, comments, SMS, and so on.",     
 	 "categoryListItemId":' + CAST(@EmployeeListItemId AS VARCHAR (10)) + ',
-     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',        
-     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + ',           
-	  "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                               + ', 
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))+ ',        
+     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))+ ',           
+	  "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))  + ', 
                   
      "reportParameter":[        
            {         
@@ -5111,11 +5039,9 @@ PRINT 'PaymentDeduction';
                 SELECT @Json = '{"report" :"TransactionBatchwithMargin",    
           "description" :"This report shows detailed timesheet information including hours, transaction code, units, and margin. This report can also be used to verify, confirm, and process transactions.", 
 		  "categoryListItemId":' + CAST(@TimesheetListItemId AS VARCHAR (MAX)) + ',
-          "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',    
+          "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + ',    
           "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ',    
-		 "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                               + ',
+		 "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX)) + ',
            "reportParameter":[    
                 {     
                   
@@ -5170,13 +5096,13 @@ PRINT 'PaymentDeduction';
 
                 --W2 4 Up Report
                 SELECT @Json = '{"report" :"W24Up",
-"description" :"This report shows wage and tax records that an employer is required to send to a particular employee and the Internal Revenue Service (IRS) at the end of the year.",
-"reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + ',
-"categoryListItemId":' + CAST(@YearEndListItemId AS VARCHAR (10)) + ',
-"isSytem": ' +      CAST(1 AS VARCHAR (10)) + ' ,
-"statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ' ,
-"reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                               + ',
+			"description" :"This report shows wage and tax records that an employer is required to send to a particular employee and the Internal Revenue Service (IRS) at the end of the year.",
+			"reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + ',
+			"categoryListItemId":' + CAST(@YearEndListItemId AS VARCHAR (10)) + ',
+			"isSytem": ' +      CAST(1 AS VARCHAR (10)) + ' ,
+			"statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ' ,
+			"reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
+										   + ',
 
 "reportParameter":[
 {
@@ -5466,12 +5392,9 @@ PRINT 'PaymentDeduction';
                 SELECT @Json = '{"report" :"TaxSummary",          
          "description" :"This report shows payroll taxes within a period of time at a summary level and can be used for verifying quarterly and yearly taxes.",    
 		 "categoryListItemId":' + CAST(@PayrollListItemId AS VARCHAR (MAX)) + ', 
-         "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',          
-         "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + ' ,      
-	  "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                               + ',       
+         "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + ',          
+         "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))+ ' ,      
+	  "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))+ ',       
                         
          "reportParameter":[          
                {           
@@ -5634,16 +5557,11 @@ PRINT 'PaymentDeduction';
                 -- 1095C
                 SELECT @Json = '{"report" :"1095C",
 								"description" :"This report shows important information about the healthcare coverage offered or provided to an employee by an employer.",
-								"reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',
-								"categoryListItemId":' + CAST(@YearEndListItemId AS VARCHAR (10))
-                               + ',
+								"reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))+ ',
+								"categoryListItemId":' + CAST(@YearEndListItemId AS VARCHAR (10)) + ',
 								"isSytem": ' + CAST(1 AS VARCHAR (10)) + ' ,
-								"statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + ' ,
-								"reportOptionListItemId":'
-                               + CAST(@ReportOptionApplicationAndShareableListItemId AS VARCHAR (MAX))
-                               + ',
+								"statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ' ,
+								"reportOptionListItemId":' + CAST(@ReportOptionApplicationAndShareableListItemId AS VARCHAR (MAX)) + ',
 
 								"reportParameter":[
 								{
@@ -5987,16 +5905,11 @@ PRINT 'PaymentDeduction';
                 --1094C
                 SELECT @Json = '{"report" :"1094C",
 								"description" :"This report includes the data reported to the Internal Revenue Service summary information for each employer.",
-								"reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',
-								"categoryListItemId":' + CAST(@YearEndListItemId AS VARCHAR (10))
-                               + ',
+								"reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + ',
+								"categoryListItemId":' + CAST(@YearEndListItemId AS VARCHAR (10)) + ',
 								"isSytem": ' + CAST(1 AS VARCHAR (10)) + ' ,
-								"statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + ' ,
-								"reportOptionListItemId":'
-                               + CAST(@ReportOptionApplicationAndShareableListItemId AS VARCHAR (MAX))
-                               + ',
+								"statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ' ,
+								"reportOptionListItemId":' + CAST(@ReportOptionApplicationAndShareableListItemId AS VARCHAR (MAX))+ ',
 
 								"reportParameter":[
 								{
@@ -6068,8 +5981,7 @@ PRINT 'PaymentDeduction';
                 --1095CLabel
                 SELECT @Json = '{"report" :"1095CLabel",          
 "description" :"This report generates a label for an envelope for the 1095C form.",          
-     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',          
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + ',          
   "categoryListItemId":' + CAST(@YearEndListItemId AS VARCHAR (10)) + ',   
   "isSytem":      ' + CAST(1 AS VARCHAR (10)) + ' ,
      "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ' ,      
@@ -6146,14 +6058,10 @@ PRINT 'PaymentDeduction';
                 --	GrossProfitSummary
                 SELECT @Json = '{"report" :"GrossProfitSummary",            
      "description" :"This report shows the summary of gross profit, total bill and pay hours of each office with charts. ",            
-     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',            
-          "categoryListItemId":' + CAST(@GrossProfitTransactionListItemId AS VARCHAR (MAX))
-                               + ',            
-     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + ' ,            
-                      	  "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                               + ',
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))  + ',            
+      "categoryListItemId":' + CAST(@GrossProfitTransactionListItemId AS VARCHAR (MAX))  + ',            
+     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ' ,            
+      "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))+ ',
                     
      "reportParameter":[{  
   
@@ -6266,14 +6174,10 @@ PRINT 'PaymentDeduction';
                 --GrossProfitbyCustomer
                 SELECT @Json = '{"report" :"GrossProfitbyCustomer",            
      "description" :"This report is a summary report that shows gross profit and information that makes up the gross profit of each customer broken down by office.",            
-     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',            
-          "categoryListItemId":' + CAST(@GrossProfitTransactionListItemId AS VARCHAR (MAX))
-                               + ',            
-     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + ' ,            
-                      	  "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                               + ',
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))  + ',            
+      "categoryListItemId":' + CAST(@GrossProfitTransactionListItemId AS VARCHAR (MAX)) + ',            
+     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ' ,            
+      "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX)) + ',
                     
      "reportParameter":[{  
   
@@ -6413,12 +6317,9 @@ PRINT 'PaymentDeduction';
                 -- SalesComparisonsFourWeeks
                 SELECT @Json = N'{"report" :"SalesComparisonsFourWeeks",  
      "description" :"This report shows the sales, margin, and hours comparison by the customer for the given date and the three previous weeks. ",  
-     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + N',  
-          "categoryListItemId": ' + CAST(@GrossProfitTransactionListItemId AS VARCHAR (MAX))
-                               + ',  
-     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + N' ,  
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + N',  
+      "categoryListItemId": ' + CAST(@GrossProfitTransactionListItemId AS VARCHAR (MAX)) + ',  
+     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))+ N' ,  
             
      "reportParameter":[ 
 	 { 
@@ -6501,12 +6402,9 @@ PRINT 'PaymentDeduction';
                 -- SalesComparisonsFourWeeksWithPriorYear
                 SELECT @Json = N'{"report" :"SalesComparisonsFourWeeksWithPriorYear",  
      "description" :"This report shows sales by customer compared to previous years sales. It includes records for four weeks from the given date.",  
-     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + N',  
-            "categoryListItemId": ' + CAST(@GrossProfitTransactionListItemId AS VARCHAR (MAX))
-                               + N',  
-     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + N' ,  
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + N',  
+      "categoryListItemId": ' + CAST(@GrossProfitTransactionListItemId AS VARCHAR (MAX)) + N',  
+     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))+ N' ,  
             
      "reportParameter":[ 
 	 { 
@@ -6586,11 +6484,10 @@ PRINT 'PaymentDeduction';
                 --- Fill Ratio
                 SELECT @Json = N'{"report" :"FillRatio",  
      "description" :"This report shows the ratio of filled employees and showed employees. Fill ratio is defined by placed versus required employees whereas showed ratio is defined by the number of employees having transactions versus placed employees.",  
-     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + N',  
-          "categoryListItemId":' + CAST(@JobAssignmentListItemId AS VARCHAR (MAX)) + ',  
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + N',  
+      "categoryListItemId":' + CAST(@JobAssignmentListItemId AS VARCHAR (MAX)) + ',  
      "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + N' ,  
-         "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
+      "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
                                + ',
    
      "reportParameter":[ 
@@ -6717,8 +6614,7 @@ PRINT 'PaymentDeduction';
                 --TurnOver        
                 SELECT @Json = '{"report" :"TurnOver",          
 "description" :"This report is used to provide employee turnover rates that were actively working or ended their assignment within the date range. This report can be filtered by client/job. ",          
-     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',          
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))+ ',          
   "categoryListItemId":' + CAST(@JobAssignmentListItemId AS VARCHAR (MAX)) + ',          
      "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ' , 
 	"reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
@@ -6888,14 +6784,10 @@ PRINT 'PaymentDeduction';
                 --ExecutiveSummary
                 SELECT @Json = '{"report" :"ExecutiveSummary",            
      "description" :"This report is a combination of different charts that includes records of gross profit, gross wages, customer count, turnover ratio, fill ratio, total bill, outstanding balance, AR aging, candidate count, Employee count and user count.",            
-     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ',            
-          "categoryListItemId":' + CAST(@AccountingGLListItemId AS VARCHAR (MAX))
-                               + ',            
-     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + ' ,            
-                      	  "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                               + ',
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))+ ',            
+      "categoryListItemId":' + CAST(@AccountingGLListItemId AS VARCHAR (MAX))+ ',            
+     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ' ,            
+      "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))+ ',
                     
      "reportParameter":[{  
   
@@ -6950,15 +6842,11 @@ PRINT 'PaymentDeduction';
                 --- Cash Requirement
                 SELECT @Json = N'{"report" :"CashRequirement",       
 				"description" :"This report shows details of liabilities and the amount of cash needed to process payroll.",   
-				"categoryListItemId": ' + CAST(@AccountingGLListItemId AS VARCHAR (MAX))
-                               + ',   
-				"reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + N',            
-							        
-							   "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + N' ,   
-						 "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                               + ',
+				"categoryListItemId": ' + CAST(@AccountingGLListItemId AS VARCHAR (MAX))+ ',   
+				"reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + N',            	        
+				"statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + N' ,   
+				"reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))+ ',
+
 							   "reportParameter":[    {   
 
            "dataTypeListItemId":' + CAST(@NumberListItemId AS VARCHAR (MAX)) + N',  
@@ -7024,7 +6912,7 @@ PRINT 'PaymentDeduction';
                                + N', "visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
                                + N',   "column": "Organization",         
 							   "parent":null,                    
-							   "description" :"Organization",     							   
+							   "description" :"Company",     							   
 							   "processingMethod" :"RpOrganizationSel",       
 							   "sortOrder":5,          
 							   "operator":"in",       
@@ -7067,13 +6955,10 @@ PRINT 'PaymentDeduction';
                 --InvoicewithMarkupPercent
                 SELECT @Json = N'{"report" :"InvoicewithMarkupPercent",  
      "description" :"This report is an invoice statement provided to the customer for all the transactions done during the billing period with the mark-up percent.",  
-     "reportTypeListItemId":' + CAST(@InvoiceStyleReportTypeListItemId AS VARCHAR (10))
-                               + N',  
-         "categoryListItemId":' + CAST(@InvoiceListItemId AS VARCHAR (MAX)) + ', 
-		   "reportOptionListItemId":' + CAST(@ReportOptionApplicationListItemId AS VARCHAR (MAX))
-                               + N',
-     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + N' ,  
+     "reportTypeListItemId":' + CAST(@InvoiceStyleReportTypeListItemId AS VARCHAR (10)) + N',  
+     "categoryListItemId":' + CAST(@InvoiceListItemId AS VARCHAR (MAX)) + ', 
+	"reportOptionListItemId":' + CAST(@ReportOptionApplicationListItemId AS VARCHAR (MAX))+ N',
+     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))+ N' ,  
             
        "reportParameter":[        
            {         
@@ -7156,13 +7041,10 @@ PRINT 'PaymentDeduction';
                 --InvoicewithMarkupandPayRate
                 SELECT @Json = N'{"report" :"InvoicewithMarkupandPayRate",  
      "description" :"This report is an invoice statement provided to the customer for all the transactions done during the billing period with mark up percent and the payrate.",  
-     "reportTypeListItemId":' + CAST(@InvoiceStyleReportTypeListItemId AS VARCHAR (10))
-                               + N',  
-         "categoryListItemId":' + CAST(@InvoiceListItemId AS VARCHAR (MAX)) + ', 
-		   "reportOptionListItemId":' + CAST(@ReportOptionApplicationListItemId AS VARCHAR (MAX))
-                               + N',
-     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + N' ,  
+     "reportTypeListItemId":' + CAST(@InvoiceStyleReportTypeListItemId AS VARCHAR (10)) + N',  
+     "categoryListItemId":' + CAST(@InvoiceListItemId AS VARCHAR (MAX)) + ', 
+	"reportOptionListItemId":' + CAST(@ReportOptionApplicationListItemId AS VARCHAR (MAX)) + N',
+     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + N' ,  
             
        "reportParameter":[        
            {         
@@ -7243,14 +7125,7 @@ PRINT 'PaymentDeduction';
                 PRINT 'InvoicewithMarkupandPayRate';
 
                 --CashReceipt
-                SELECT @Json = N'{"report" :"CashReceipt",       "description" :"This report all AR payments received during a given date range. It can be further filtered by Payment Type and Reason Code.",       "reportTypeListItemId":'
-                               + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + N',            "categoryListItemId":'
-                               + CAST(@AccountsReceivableListItemId AS VARCHAR (MAX)) + ',       "statusListItemId":'
-                               + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + N' ,           "reportOptionListItemId":'
-                               + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                               + ',        "reportParameter":[ 	 { 							  							    "dataTypeListItemId":'
+                SELECT @Json = N'{"report" :"CashReceipt",       "description" :"This report all AR payments received during a given date range. It can be further filtered by Payment Type and Reason Code.",       "reportTypeListItemId":'+ CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + N',        "categoryListItemId":'+ CAST(@AccountsReceivableListItemId AS VARCHAR (MAX)) + ',       "statusListItemId":'+ CAST(@ActiveStatusListItemId AS VARCHAR (10)) + N' ,        "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))+ ',        "reportParameter":[ 	 { 							  							    "dataTypeListItemId":'
                                + CAST(@NumberListItemId AS VARCHAR (MAX)) + N',								"visibilityListItemId":'
                                + CAST(@HiddenListItemId AS VARCHAR (MAX))
                                + N',								    "column": "UserPersonId",							   "parent":null,						   							    								"description" :"UserPersonId",									"processingMethod" :null,									"sortOrder":1,							    "operator":"equals",									 "required":1,																		    "defaultValue":null							  },							    {                         "dataTypeListItemId":'
@@ -7293,17 +7168,13 @@ PRINT 'PaymentDeduction';
 
 
 
-
+				--WorkerCompCost
                 SELECT @Json = '{"report" :"WorkerCompCost",        
      "description" :"This report shows total worker comp wages, rates, and cost. It can be further filtered with a group by Office/ Customer/ State/ WC Code/ Employee to see detail and summary. The WC Rate is calculated using the formula WC Cost divided by WC Wage.",        
-     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-                               + ', 
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + ', 
 	 "categoryListItemId":' + CAST(@AccountingGLListItemId AS VARCHAR (MAX)) + ',
-
-	"reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-                               + ',				
-     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
-                               + ' ,        
+	"reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))+ ',				
+     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ' ,        
                   
      "reportParameter":[        
            {         
@@ -7456,14 +7327,14 @@ PRINT 'PaymentDeduction';
                 EXEC dbo.[SpPaginatedReportSetupIns] @Json = @Json; -- varchar(max)        
                 PRINT 'WorkerCompCost';
 
+
+				--LeaderBoard
 				SELECT @Json = '{"report" :"LeaderBoard",          
      "description" :"Leader Board Report",          
-     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-               + ',          
-          "category":' + CAST(@AdminListItemId AS VARCHAR (MAX)) + ',          
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))+ ',          
+      "category":' + CAST(@AdminListItemId AS VARCHAR (MAX)) + ',          
      "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ' ,     
-	  "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-               + ',      
+	  "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX)) + ',      
                     
      "reportParameter":[ 
 	 {         
@@ -7572,12 +7443,10 @@ PRINT 'LeaderBoard';
 --StaffActivity
 SELECT @Json = N'{"report" :"StaffActivity",        
      "description" :"Staff Activity report",        
-     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
-               + N',   
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10)) + N',   
 	 "categoryListItemId":' + CAST(@AdminListItemId AS VARCHAR (MAX)) + N',
      "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + N' ,        
-	"reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
-               + N',
+	"reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))+ N',
                   
      "reportParameter":[        
            {         
@@ -7675,7 +7544,429 @@ SELECT @Json = N'{"report" :"StaffActivity",
 EXEC dbo.[SpPaginatedReportSetupIns] @Json = @Json; -- varchar(max)        
 PRINT 'StaffActivity';
 
+ ---CustomerBillingSummary
 
+                SELECT @Json = '{"report" :"CustomerBillingSummary",            
+     "description" :"Customer Billing Summary Report",            
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
+                               + ',            
+          "categoryListItemId":' + CAST(@CustomerListItemId AS VARCHAR (MAX))
+                               + ',            
+     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
+                               + ' ,            
+                      	  "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
+                               + ',
+                    
+     "reportParameter":[{  
+  
+     "dataTypeListItemId":' + CAST(@NumberListItemId AS VARCHAR (MAX)) + ',  
+     "visibilityListItemId":' + CAST(@HiddenListItemId AS VARCHAR (MAX))
+                               + ',  
+     "column": "UserPersonId",  
+     "parent":null,  
+     "description" :"UserPersonId",  
+     "processingMethod" :null,  
+     "sortOrder":1,  
+     "operator":"equals",  
+     "required":1,  
+     "defaultValue":null  
+     },{         
+                 
+           "dataTypeListItemId":' + CAST(@NumberListItemId AS VARCHAR (MAX))
+                               + ',        
+        "visibilityListItemId":' + CAST(@HiddenListItemId AS VARCHAR (MAX))
+                               + ',         
+           "column": "ReportId",        
+          "parent":null,                            
+        "description" :"Report Id",         
+        "processingMethod" :null,         
+        "sortOrder":2,        
+           "operator":"equals",         
+         "required":0,                   
+           "defaultValue":null        
+         } 
+              ,
+	 	 {         
+						 "dataTypeListItemId":' + CAST(@SelectListItemId AS VARCHAR (MAX))
+                               + ',        
+						 "visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+                               + ',          
+						 "column": "DateType",         
+						 "parent":null,        
+							"description" :"Date Type",	
+						 "processingMethod" :"RpInvoiceAccountingPeriodPayPeriodEndDateSel",         
+						    "sortOrder":3,        
+						    "operator":"equals",         
+						 "required":1,                  
+						 "defaultValue":[{"key":"DateType","value":"Accounting Period Date","isParameter":1}]        
+						 },
+	{             
+          "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
+                               + ',            
+        "visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+                               + ',             
+           "column": "StartDate",            
+          "parent":null,                                
+        "description" :"Start Date",             
+        "processingMethod" :null,             
+        "sortOrder":4,            
+           "operator":"equals",             
+         "required":1,                       
+           "defaultValue":null   } ,
+		   {             
+          "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
+                               + ',            
+        "visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+                               + ',             
+           "column": "EndDate",            
+          "parent":null,                                
+        "description" :"EndDate",             
+        "processingMethod" :null,             
+        "sortOrder":5,            
+           "operator":"equals",             
+         "required":1,                
+           "defaultValue":null            
+                     
+         },{ 
+							    "dataTypeListItemId":' + CAST(@StringListItemId AS VARCHAR (MAX))
+                               + ',
+								"visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+                               + ',	
+							   "column": "CustomerId",
+							   "parent":null, 						    
+								"description" :"Customer Id",
+								"processingMethod" :null,		
+								"sortOrder":6,
+								"operator":"contains",	
+								"required":1,								
+							    "defaultValue":[{"key":"CustomerId","value":"0","isParameter":1}] 
+							  } ,
+						 { 
+							    "dataTypeListItemId":' + CAST(@StringListItemId AS VARCHAR (MAX))
+                               + ',
+								"visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+                               + ',	
+							   "column": "Customer",
+							   "parent":null, 						    
+								"description" :"Customer",
+								"processingMethod" :null,		
+								"sortOrder":7,
+								"operator":"contains",	
+								"required":1,								
+							    "defaultValue":[{"key":"Customer","value":"%","isParameter":1}]
+							  }  
+							  ,
+	 {         
+						 "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
+                               + ',        
+						 "visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+                               + ',          
+						 "column": "GroupBy",         
+						 "parent":null,        
+							"description" :"Secondary Group By",	
+						 "processingMethod" :"RpSecondaryGroupBySel",         
+						    "sortOrder":8,        
+						    "operator":"in",         
+						 "required":1,                  
+						 "defaultValue":[{"key":"GroupBy","value":"None","isParameter":1}]        
+						 }
+         
+                         ]              
+        }'      ;
+                EXEC dbo.SpPaginatedReportSetupIns @Json = @Json;
+                PRINT 'CustomerBillingSummary';
+                --customer billing detail
+
+                SELECT @Json = '{"report" :"CustomerBillingDetail",        
+     "description" :"This report billing detail of the customer in a given date range.",   
+	 "categoryListItemId":' + CAST(@CustomerListItemId AS VARCHAR (10)) + ',  
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
+                               + ',        
+     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
+                               + '      ,      
+	  "reportOptionListItemId":' + CAST(@ReportOptionApplicationAndShareableListItemId AS VARCHAR (MAX))
+                               + ',    
+           
+             
+     "reportParameter":[        
+           {         
+                 
+           "dataTypeListItemId":' + CAST(@NumberListItemId AS VARCHAR (MAX))
+                               + ',        
+        "visibilityListItemId":' + CAST(@HiddenListItemId AS VARCHAR (MAX))
+                               + ',         
+           "column": "UserPersonId",     
+          "parent":null,                            
+        "description" :"UserPersonId",         
+        "processingMethod" :null,         
+        "sortOrder":1,        
+           "operator":"equals",         
+         "required":1,                   
+           "defaultValue":null        
+         },   
+		  {         
+                 
+           "dataTypeListItemId":' + CAST(@NumberListItemId AS VARCHAR (MAX))
+                               + ',        
+        "visibilityListItemId":' + CAST(@HiddenListItemId AS VARCHAR (MAX))
+                               + ',         
+           "column": "ReportId",        
+          "parent":null,                            
+        "description" :"Report Id",         
+        "processingMethod" :null,         
+        "sortOrder":2,        
+           "operator":"equals",         
+         "required":1,                   
+           "defaultValue":null        
+         },    
+        {         
+        "dataTypeListItemId":' + CAST(@SelectListItemId AS VARCHAR (MAX))
+                               + ',        
+        "visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+                               + ',          
+        "column": "DateType",         
+        "parent":null,                      
+           "description" :"Date Type",        
+        "processingMethod" :"RpInvoiceAccountingPeriodPayPeriodEndDateSel",         
+           "sortOrder":3,        
+           "operator":"equals",         
+        "required":1,                   
+        "defaultValue":[{"key":"DateType","value":"Accounting Period Date","isParameter":1}]        
+        }, 
+        {         
+          "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
+                               + ',        
+        "visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+                               + ',         
+           "column": "StartDate",        
+          "parent":null,                            
+        "description" :"Start Date",         
+        "processingMethod" :null,         
+        "sortOrder":4,        
+           "operator":"equals",         
+         "required":1,                   
+           "defaultValue":null        
+                 
+         },        
+         {         
+          "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
+                               + ',        
+        "visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+                               + ',         
+           "column": "EndDate",        
+          "parent":null,                            
+        "description" :"End Date",         
+        "processingMethod" :null,         
+        "sortOrder":5,        
+           "operator":"equals",         
+         "required":1,                   
+           "defaultValue":null        
+                 
+         },    
+          {         
+           "dataTypeListItemId":' + CAST(@StringListItemId AS VARCHAR (MAX))
+                               + ',        
+        "visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+                               + ',         
+          "column": "Customer",        
+          "parent":null,                   
+        "description" :"Customer",        
+        "processingMethod" :null,          
+        "sortOrder":6,        
+        "operator":"contains",         
+        "required":1,                
+           "defaultValue":[{"key":"Customer","value":"%","isParameter":1}]        
+         }  ,     
+        {         
+        "dataTypeListItemId":' + CAST(@NumberListItemId AS VARCHAR (MAX))
+                               + ',        
+        "visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+                               + ',          
+        "column": "CustomerId",         
+        "parent":null,        
+           "description" :"CustomerId",        
+        "processingMethod" :null,         
+           "sortOrder":7,        
+           "operator":"equals",         
+        "required":1,                   
+        "defaultValue":[{"key":"CustomerId","value":0,"isParameter":1}]        
+        }, 
+		     
+         {         
+           "dataTypeListItemId":' + CAST(@SelectListItemId AS VARCHAR (MAX))
+                               + ',        
+        "visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+                               + ',         
+          "column": "SecondaryGroupBy",        
+          "parent":null,                   
+        "description" :"SecondaryGroupBy",        
+        "processingMethod" :"RpSecondaryGroupBySel",          
+         "sortOrder":8,        
+           "operator":"equals",         
+         "required":1,                
+           "defaultValue":[{"key":"SecondaryGroupBy","value":"None","isParameter":1}]    
+         },  {         
+           "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
+                               + ',        
+        "visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+                               + ',         
+          "column": "TransactionCode",        
+          "parent":null,                   
+        "description" :"Transaction Code",        
+        "processingMethod" :"RpPayCodeSel",          
+         "sortOrder":9,        
+           "operator":"in",         
+         "required":0,                
+           "defaultValue":null   
+         }
+         ]        
+        
+         }'     ;
+                EXEC dbo.[SpPaginatedReportSetupIns] @Json = @Json; -- varchar(max)        
+                PRINT 'CustomerBillingDetail';
+
+
+				--CustomerInvoiceSummary
+				SELECT @Json = '{"report" :"CustomerInvoiceSummary",
+					"description" :"This reports shows the Invoice related data including total bill, discount, sales tax and hours ",
+					"categoryListItemId":' + CAST(@InvoiceListItemId AS VARCHAR (MAX))
+               + ',
+					"reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
+               + ',
+					"statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10))
+               + ' ,
+							     
+	  "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
+               + ',
+					"reportParameter":[
+							    { 
+							  
+							    "dataTypeListItemId":' + CAST(@NumberListItemId AS VARCHAR (MAX))
+               + ',
+								"visibilityListItemId":' + CAST(@HiddenListItemId AS VARCHAR (MAX))
+               + ',	
+							    "column": "UserPersonId",
+							   "parent":null,						   							    
+								"description" :"UserPersonId",	
+								"processingMethod" :null,	
+								"sortOrder":1,
+							    "operator":"equals",	
+								 "required":1
+							  },
+							  
+							  	  {         
+						 "dataTypeListItemId":' + CAST(@SelectListItemId AS VARCHAR (MAX))
+               + ',        
+						 "visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+               + ',          
+						 "column": "DateType",         
+						 "parent":null,        
+							"description" :"Date Type",	
+						 "processingMethod" :"RpInvoiceDateAccountingPeriodDateSel",         
+						    "sortOrder":2,        
+						    "operator":"equals",         
+						 "required":0    
+						 },
+							   { 
+							   "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
+               + ',
+								"visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+               + ',	
+							    "column": "StartDate",
+							   "parent":null,						   							    
+								"description" :"Start Date",	
+								"processingMethod" :null,	
+								"sortOrder":3,
+							    "operator":"greaterthanorequal",	
+								 "required":0
+							  
+							  },
+							  { 
+							   "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
+               + ',
+								"visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+               + ',	
+							    "column": "EndDate",
+							   "parent":null,						   							    
+								"description" :"End Date",	
+							
+								"sortOrder":4,
+							    "operator":"lessthanorequal",	
+								 "required":0
+							  
+							  },
+						
+						 { 
+						"dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
+               + ',
+								"visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+               + ',	
+							   "column": "Company",
+							   "parent":null, 						    
+								"description" :"Company",
+								"processingMethod" :"RpOrganizationSel",		
+								"sortOrder":5,
+								"operator":"in",	
+								"required":0
+							  },
+							  { 
+							   "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
+               + ',
+								"visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+               + ',	
+							  "column": "Office",
+							   "parent":"Company",		   
+							   "description" :"Office",	
+							   "processingMethod" :"RpOfficeByOrganizationSel",
+							    "sortOrder":6,
+							   "operator":"in",	
+								"required":0
+								},													
+								{ 
+							    "dataTypeListItemId":' + CAST(@NumberListItemId AS VARCHAR (MAX))
+               + ',
+								"visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+               + ',	
+							   "column": "CustomerId",
+											    
+								"description" :"Customer Id",							
+								"sortOrder":7,
+								"operator":"equals",	
+								"required":0						
+							   
+							  },
+							  { 
+							    "dataTypeListItemId":' + CAST(@StringListItemId AS VARCHAR (MAX))
+               + ',
+								"visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+               + ',	
+							   "column": "CustomerName",											    
+								"description" :"Customer Name",							
+								"sortOrder":8,
+								"operator":"contains",	
+								"required":0						
+							   
+							  },
+							  {     
+
+              "dataTypeListItemId":' + CAST(@NumberListItemId AS VARCHAR (MAX))
+               + ',    
+           "visibilityListItemId":' + CAST(@HiddenListItemId AS VARCHAR (MAX))
+               + ',     
+              "column": "ReportId",    
+             "parent":null,                        
+           "description" :"Report Id",     
+           "processingMethod" :null,     
+           "sortOrder":9,    
+              "operator":"equals",     
+            "required":0,               
+              "defaultValue":null    
+            }     
+								 
+							  ]
+							  }';
+EXEC dbo.[SpPaginatedReportSetupIns] @Json = @Json;
+PRINT 'CustomerInvoiceSummary';
 
 --PayrollSummary
 SELECT @Json = '{"report" :"PayrollSummary",
@@ -7825,7 +8116,6 @@ SELECT @Json = '{"report" :"PayrollSummary",
 EXEC dbo.SpPaginatedReportSetupIns @Json = @Json OUTPUT;
 PRINT 'PayrollSummary';
 
-
 --DocumentExpiration
                 SELECT @Json = '{"report" :"DocumentExpiration",        
      "description" :"This report related to the expiration Of documents",        
@@ -7960,6 +8250,229 @@ PRINT 'PayrollSummary';
                 EXEC dbo.[SpPaginatedReportSetupIns] @Json = @Json;
                 PRINT 'DocumentExpiration';
 
+
+
+
+
+            /*  
+				/* Removed Reports */
+				 --OfficeTaxSummary
+                SELECT @Json = '{"report" :"OfficeTaxSummary",        
+     "description" :"Office Tax Summary Report",        "categoryListItemId":' + CAST(@PayrollListItemId AS VARCHAR (MAX))
+                               + ',
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
+                               + ',        
+     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ' ,     
+	  "reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
+                               + ',    
+                  
+     "reportParameter":[        
+           {         
+                 
+           "dataTypeListItemId":' + CAST(@NumberListItemId AS VARCHAR (MAX))
+                               + ',        
+        "visibilityListItemId":' + CAST(@HiddenListItemId AS VARCHAR (MAX))
+                               + ',         
+           "column": "UserPersonId",        
+          "parent":null,                            
+        "description" :"UserPersonId",         
+        "processingMethod" :null,         
+        "sortOrder":1,        
+           "operator":"equals",         
+         "required":1,                   
+           "defaultValue":null        
+         },        
+                
+          {         
+        "dataTypeListItemId":' + CAST(@SelectListItemId AS VARCHAR (MAX))
+                               + ',        
+        "visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+                               + ',          
+        "column": "DateType",         
+        "parent":null,        
+        "parentMappingId":1,         
+           "description" :"DateType",        
+        "processingMethod" :"RpListItemSel",         
+           "sortOrder":2,        
+           "operator":"equals",         
+        "required":1,                  
+        "defaultValue":[{"key":"Category","value":"ReportDateType","isParameter":1}]        
+        },        
+        
+         {         
+          "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
+                               + ',        
+        "visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+                               + ',         
+           "column": "StartDate",        
+          "parent":null,                            
+        "description" :"Start Date",         
+        "processingMethod" :null,         
+        "sortOrder":3,        
+           "operator":"equals",         
+         "required":1,                   
+           "defaultValue":null        
+                 
+         },        
+         {         
+          "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
+                               + ',        
+        "visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+                               + ',         
+           "column": "EndDate",        
+          "parent":null,                            
+        "description" :"End Date",         
+        "processingMethod" :null,         
+        "sortOrder":4,        
+           "operator":"equals",         
+         "required":1,                   
+           "defaultValue":null        
+                 
+         },        
+                 
+         {         
+           "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
+                               + ',        
+        "visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+                               + ',         
+          "column": "Company",        
+          "parent":null,                   
+        "description" :"Company",        
+        "processingMethod" :"RpOrganizationSel",          
+         "sortOrder":5,        
+           "operator":"in",         
+         "required":0,                
+           "defaultValue":null        
+         },        
+         {         
+          "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
+                               + ',        
+        "visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+                               + ',         
+         "column": "Office",        
+          "parent":"Company",        
+                  
+          "description" :"Office",         
+          "processingMethod" :"RpOfficeByOrganizationSel",        
+           "sortOrder":6,        
+          "operator":"in",         
+         "required":0,                   
+        "defaultValue":null        
+        }
+         ]        
+         }'     ;
+                EXEC dbo.[SpPaginatedReportSetupIns] @Json = @Json; -- varchar(max)        
+                PRINT 'OfficeTaxSummary';
+				
+
+				  --WCCostSummary
+                SELECT @Json = '{"report" :"WCCostSummary",  
+     "description" :"WC Cost Summary by Branch Report",  
+     "reportTypeListItemId":' + CAST(@PaginatedReportReportTypeListItemId AS VARCHAR (10))
+                               + ',  
+          "categoryListItemId":' + CAST(@AccountingGLListItemId AS VARCHAR (10)) + ',  
+     "statusListItemId":' + CAST(@ActiveStatusListItemId AS VARCHAR (10)) + ' ,  	
+	"reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
+                               + ',
+                    
+            
+     "reportParameter":[  
+	 {         
+                 
+           "dataTypeListItemId":' + CAST(@NumberListItemId AS VARCHAR (MAX))
+                               + ',        
+        "visibilityListItemId":' + CAST(@HiddenListItemId AS VARCHAR (MAX))
+                               + ',         
+           "column": "UserPersonId",        
+          "parent":null,                            
+        "description" :"UserPersonId",         
+        "processingMethod" :null,         
+        "sortOrder":1,        
+           "operator":"equals",         
+         "required":1,                   
+           "defaultValue":null        
+         },
+		 {   
+          "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX)) + ',  
+        "visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+                               + ',   
+           "column": "StartDate",  
+          "parent":null,                      
+        "description" :"Start Date (AP)",   
+        "processingMethod" :null,   
+        "sortOrder":2,  
+           "operator":"equals",   
+         "required":1,             
+           "defaultValue":null  
+           
+         },  
+         {   
+          "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX)) + ',  
+        "visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+                               + ',   
+            "column": "EndDate",  
+          "parent":null,                      
+        "description" :"End Date (AP)",   
+        "processingMethod" :null,   
+        "sortOrder":3,  
+           "operator":"equals",   
+         "required":1,             
+           "defaultValue":null  
+           
+         },
+           {   
+           "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
+                               + ',  
+        "visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+                               + ',   
+          "column": "Company",  
+          "parent":null,             
+        "description" :"Company",  
+        "processingMethod" :"RpOrganizationSel",    
+         "sortOrder":4,  
+           "operator":"in",   
+         "required":0,          
+           "defaultValue":null  
+         },{   
+          "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
+                               + ',  
+        "visibilityListItemId":' + CAST(@VisibleListItemId AS VARCHAR (MAX))
+                               + ',   
+         "column": "Office",  
+          "parent":"Company",  
+            
+          "description" :"Office",   
+          "processingMethod" :"RpOfficeByOrganizationSel",  
+           "sortOrder":5,  
+          "operator":"in",   
+         "required":0,             
+        "defaultValue":null  
+        },
+
+           {     
+
+              "dataTypeListItemId":' + CAST(@NumberListItemId AS VARCHAR (MAX))
+                               + ',    
+           "visibilityListItemId":' + CAST(@HiddenListItemId AS VARCHAR (MAX))
+                               + ',     
+              "column": "ReportId",    
+             "parent":null,                        
+           "description" :"Report Id",     
+           "processingMethod" :null,     
+           "sortOrder":6,    
+              "operator":"equals",     
+            "required":0,               
+              "defaultValue":null    
+            }      
+               
+          
+          
+        ]    
+        }'      ;
+                EXEC dbo.SpPaginatedReportSetupIns @Json = @Json; --OUTPUT -- varchar(max)
+                PRINT 'WCCostSummary';
+
+				*/
 
 
 
@@ -8468,7 +8981,29 @@ PRINT 'PayrollSummary';
                                                @ProcessingMethod = 'RpWorkerCompCost';
             END;
 
-           
+            /* Removed Reports
+
+			
+            --OfficeTaxSummary          
+
+            BEGIN
+
+                EXEC [dbo].[SpImportReportXML] @ReportName = N'OfficeTaxSummary' ,         -- nvarchar(50)          
+                                               @ImageFolderPath = @DatabasePath ,          -- nvarchar(1000)          
+                                               @Filename = N'OfficeTaxSummaryReport.xml' , -- nvarchar(1000)          
+                                               @ProcessingMethod = 'RpOfficeTaxSummary';
+            END;
+			  ----WCCostSummary  
+
+            BEGIN
+
+                EXEC [dbo].[SpImportReportXML] @ReportName = N'WCCostSummary' ,         -- nvarchar(50)  
+                                               @ImageFolderPath = @DatabasePath ,       -- nvarchar(1000)  
+                                               @Filename = N'WCCostSummaryReport.xml' , -- nvarchar(1000)  
+                                               @ProcessingMethod = 'RpWcCostSummary';
+            END;
+			
+			*/
             COMMIT TRANSACTION;
         END TRY
         BEGIN CATCH
