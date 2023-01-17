@@ -6090,6 +6090,7 @@ AS
             SELECT @rptParam = '{"report":{"edit":"ReportDetail",        
            "reportId":0,        
            "report":"CustomerSetup",
+		     "reportTitle":"Customer Setup",
 		    "category":' + CAST(@CustomerListItemId AS VARCHAR (MAX))
                                + ',
            "status":"active",        
