@@ -14884,6 +14884,7 @@ AS
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}],
 			   "Description":""           
                  },
+
 				 {          
                    "TemplateEntity": "Contact",          
                    "Column": "RoleDepartment",          
@@ -14898,7 +14899,9 @@ AS
                    "ColumnWidth": 300,          
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
 			   "Description":""           
-                 },{          
+                 },
+				 
+				 {          
                    "TemplateEntity": "Contact",          
                    "Column": "PersonId",          
                    "DataType": "Number",          
@@ -14911,7 +14914,9 @@ AS
                    "ColumnWidth": 200,          
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
 			   "Description":""           
-                 },{          
+                 },
+				 
+				 {          
                    "TemplateEntity": "Contact",          
                    "Column": "CustomerId",          
                    "DataType": "Number",          
@@ -14924,7 +14929,9 @@ AS
                    "ColumnWidth": 200, 
 				   "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}],
                 "Description":"This is Id of customer"          
-                 },{          
+                 },
+				 
+				 {          
                    "TemplateEntity": "Contact",          
                    "Column": "CustomerInsertDate",          
                    "DataType": "Date",          
@@ -14937,7 +14944,9 @@ AS
                    "ColumnWidth": 200,          
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}],
 			   "Description":""           
-                 },{          
+                 },
+				 
+				 {          
                    "TemplateEntity": "Contact",          
                    "Column": "ContactInsertDate",          
                    "DataType": "Date",          
@@ -14950,7 +14959,9 @@ AS
                    "ColumnWidth": 200,          
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}],
 			   "Description":""           
-                 },{          
+                 },
+				 
+				 {          
                    "TemplateEntity": "Contact",          
                    "Column": "Entity",          
                    "DataType": "String",          
