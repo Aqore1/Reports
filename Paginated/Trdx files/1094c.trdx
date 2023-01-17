@@ -1,4 +1,5 @@
-<Report xmlns="http://schemas.telerik.com/reporting/2019/1.0" DataSourceName="webServiceDataSource1" Width="10.6in" Name="1094C" ShowSnapGrid="True">
+<?xml version="1.0" encoding="utf-8"?>
+<Report DataSourceName="webServiceDataSource1" Width="10.6in" Name="1094C" ShowSnapGrid="True" xmlns="http://schemas.telerik.com/reporting/2019/1.0">
   <Style VerticalAlign="Middle">
     <Font Name="Calibri" Size="8pt" />
   </Style>
@@ -4577,7 +4578,7 @@
   <ReportParameters>
     <ReportParameter Name="UserPersonId" Type="Integer" Text="UserPersonId" AllowBlank="False">
       <Value>
-        <String />
+        <String></String>
       </Value>
     </ReportParameter>
     <ReportParameter Name="Organization" Text="Company" Visible="True">
@@ -4587,18 +4588,18 @@
         </Sortings>
       </AvailableValues>
       <Value>
-        <String />
+        <String></String>
       </Value>
     </ReportParameter>
     <ReportParameter Name="Year" Text="Year" Visible="True">
       <AvailableValues DataSourceName="AccountingPeriodSel" DisplayMember="= Fields.Year" ValueMember="= Fields.Year" />
       <Value>
-        <String />
+        <String></String>
       </Value>
     </ReportParameter>
     <ReportParameter Name="ReportId" Type="Integer" Text="ReportId" AllowBlank="False">
       <Value>
-        <String />
+        <String></String>
       </Value>
     </ReportParameter>
   </ReportParameters>
