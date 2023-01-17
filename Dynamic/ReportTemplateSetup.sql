@@ -20,9 +20,40 @@ modified: sasita 6/24/2021: updated WCRate, ERTax, EETax, EmployerTax, Rate, Emp
 -- Modified At: 10/18/2021
 -- Description:	InsertDate Column added ticket (30607)
 -- =============================================
--- =============================================
 --modified: sasita 11/23/2021: renamed Zero Balance report parameter to IncludeZeroBalanceInvoices for USER STORY 30244 Version 21.12
+---Modified By: Ankita(03/30/2022) Added Phone column in Payment template in reference to userstory 32652
+
 -===============================================
+-- Modified by:		Pratigya Thapa
+-- Create date: 5/5/2022
+-- Description:	remove Customer Column (bug :33048)
+-- =============================================
+-- Modified By:	Sushant
+-- Modified At: 5/5/2022
+-- Description:	JobTitle Column added for applicant template (33707)
+-- =============================================
+
+-- =============================================
+-- Modified By:	Samiksha
+-- Modified At: 7/4//2022
+-- Description:	IsResident Column added for PaymentTax template (US: 33525)
+-- =============================================
+
+-- =============================================
+-- Modified By:	Samiksha
+-- Modified At: 7/4//2022
+-- Description:	PO number, Extra1, Extra2, Extra3, and Extra4 in Transaction reated template(US: 34333)
+-- =============================================
+-- =============================================
+-- Modified By:	Samiksha
+-- Modified At: 8/23/2022
+-- Description: Added last 6 of ssn column in all templates where ssn is pulled:	User story (34331)
+-- =============================================
+-- =============================================
+-- Modified By:	Sasita
+-- Modified At: 9/12/2022
+-- Description: Added Phone column in Transaction and Transaction  Item Template  as per ticket:37416 and US:
+-- =============================================
          -- Operators & Aggregate => follow convention for seed data          
                  
         DataType String          
@@ -115,16 +146,6 @@ modified: sasita 6/24/2021: updated WCRate, ERTax, EETax, EmployerTax, Rate, Emp
 					"Description":""          
                  }
  */
----Modified By: Ankita(03/30/2022) Added Phone column in Payment template in reference to userstory 32652
--- =============================================       
--- Modified By:	Ashesh Bajracharya
--- Modified At: 09/15/2022
--- Description:	Added Column TotalPay, TotalBill, TotalPayhour, TotalBillHours on assignment for USER STORY 34875
--- =============================================
--- Modified By:	Sasita
--- Modified At: 11/18/2022
--- Description:	Added Column EmployeeStatus on assignment for USER STORY 36452
--- =============================================
 
 ALTER PROCEDURE [dbo].[ReportTemplateSetup]
 AS
@@ -674,7 +695,62 @@ AS
                    "ColumnWidth": 300,          
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}],
 			   "Description":""           
-                 }                                   
+                 }  ,  {          
+                   "TemplateEntity": "Customer",          
+                   "Column": "Address 1",          
+                   "DataType": "String",          
+                   "ProcessingMethod":null,          
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList": [{"value":"equals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"endswith"},{"value":"startswith"},{"value":"endswith"},{"value":"startswith"}],          
+                    "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 38,          
+                   "ColumnWidth": 300,          
+					"GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+					"Description":""      
+                 },          
+                 {          
+                   "TemplateEntity": "Customer",          
+                   "Column": "Address 2",          
+                   "DataType": "String",          
+                   "ProcessingMethod":null,          
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList": [{"value":"equals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"endswith"},{"value":"startswith"},{"value":"endswith"},{"value":"startswith"}],          
+                    "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 39,          
+                   "ColumnWidth": 300,          
+					"GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+					"Description":""      
+                 } ,{          
+                   "TemplateEntity": "Customer",          
+                   "Column": "LastInvoiceDate",          
+                   "DataType": "Date",          
+                   "ProcessingMethod": null,          
+                   "Operator": "between",          
+                   "Aggregation": "",          
+                     "OperatorList": [{"value":"equals"},{"value":"notequals"},{"value":"between"},{"value":"greaterthan"},{"value":"lessthan"},{"value":"greaterthanorequal"},{"value":"lessthanorequal"}],         
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 43,          
+                   "ColumnWidth": 200,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":""           
+                 } ,
+				  {          
+                 "TemplateEntity": "Customer",          
+                   "Column": "CreatedDate",          
+                   "DataType": "Date",          
+                   "ProcessingMethod": null,          
+                   "Operator": "between",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"between"},{"value":"greaterthan"},{"value":"lessthan"},{"value":"greaterthanorequal"},{"value":"lessthanorequal"}],          
+                   "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],          
+                   "SortOrder": 44,          
+                   "ColumnWidth": 300,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}],
+			   "Description":""           
+                 }   
+
                  ]';
             END;
             PRINT 'Customer';
@@ -1044,11 +1120,44 @@ AS
                    "ColumnWidth": 300,            
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}],
 			   "Description":""             
-                 }          
+                 } ,
+				 
+				 {          
+                   "TemplateEntity": "Newhire",          
+                   "Column": "Last6OfSSN",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 26,          
+                   "ColumnWidth": 300,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":""           
+                 } ,
+
+				 {          
+                 "TemplateEntity": "Newhire",          
+                   "Column": "CreatedDate",          
+                   "DataType": "Date",          
+                   "ProcessingMethod": null,          
+                   "Operator": "between",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"between"},{"value":"greaterthan"},{"value":"lessthan"},{"value":"greaterthanorequal"},{"value":"lessthanorequal"}],          
+                   "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],          
+                   "SortOrder": 27,          
+                   "ColumnWidth": 300,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}],
+			   "Description":""           
+                 }   
+
+				 
+
                ]';
 
             END;
             PRINT 'Newhire';
+
             --Employee template          
             BEGIN
                 EXEC dbo.SpReportTemplateColumnIns @Json = '[          
@@ -1707,7 +1816,6 @@ AS
                ]';
 
             END;
-            PRINT 'Employee';
 
             --Applicant template          
             BEGIN
@@ -2062,7 +2170,51 @@ AS
                    "ColumnWidth": 300,          
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}],
 			   "Description":""           
-                 }        
+                 },
+				  {          
+                   "TemplateEntity": "Applicant",          
+                   "Column": "JobTitle",          
+                   "DataType": "String",          
+                   "ProcessingMethod": null,          
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList": [{"value":"equals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"endswith"},{"value":"startswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 25,          
+                   "ColumnWidth": 300,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":""           
+                 },
+				  {          
+                   "TemplateEntity": "Applicant",          
+                   "Column": "Last6OfSSN",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 26,          
+                   "ColumnWidth": 300,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":""           
+                 } ,
+				 {          
+                 "TemplateEntity": "Applicant",          
+                   "Column": "CreatedDate",          
+                   "DataType": "Date",          
+                   "ProcessingMethod": null,          
+                   "Operator": "between",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"between"},{"value":"greaterthan"},{"value":"lessthan"},{"value":"greaterthanorequal"},{"value":"lessthanorequal"}],          
+                   "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],          
+                   "SortOrder": 27,          
+                   "ColumnWidth": 300,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}],
+			   "Description":""           
+                 }   
+
+
+
                ]';
             END;
             PRINT 'Applicant';
@@ -3636,7 +3788,116 @@ AS
                    "ColumnWidth": 200,          
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
 			   "Description":""           
+                 },
+				  {          
+                   "TemplateEntity": "Transaction",          
+                   "Column": "CustomerId",          
+                   "DataType": "Number",          
+                   "ProcessingMethod": null,          
+                   "Operator": "equals",          
+                   "Aggregation": "",          
+                   "OperatorList": [{"value":"equals"},{"value":"notequals"},{"value":"between"},{"value":"greaterthan"},{"value":"lessthan"},{"value":"greaterthanorequal"},{"value":"lessthanorequal"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"},{"value":"sum"},{"value":"average"},{"value":"min"},{"value":"max"}],            
+                   "SortOrder": 112,          
+                   "ColumnWidth": 200,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}],
+			   "Description":""           
+                 },
+
+				 {          
+                   "TemplateEntity": "Transaction",          
+                   "Column": "Last6OfSSN",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 113,          
+                   "ColumnWidth": 200,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":""           
+                 }   ,
+				  {          
+                   "TemplateEntity": "Transaction",          
+                   "Column": "PONumber",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 114,          
+                   "ColumnWidth": 200,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":"PO Number"           
+                 } ,
+				  {          
+                   "TemplateEntity": "Transaction",          
+                   "Column": "Extra1",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 114,          
+                   "ColumnWidth": 200,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":"Extra 1"           
+                 } ,
+				 {          
+                   "TemplateEntity": "Transaction",          
+                   "Column": "Extra2",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 115,          
+                   "ColumnWidth": 200,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":"Extra 2"           
+                 } ,
+				 {          
+                   "TemplateEntity": "Transaction",          
+                   "Column": "Extra3",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 116,          
+                   "ColumnWidth": 200,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":"Extra 3"           
+                 } ,
+				 {          
+                   "TemplateEntity": "Transaction",          
+                   "Column": "Extra4",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 117,          
+                   "ColumnWidth": 200,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":"Extra 4"           
+                 } ,          
+                 {          
+                   "TemplateEntity": "Transaction",          
+                   "Column": "Phone",          
+                   "DataType": "String",          
+                   "ProcessingMethod": null,          
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":[{"value":"contains"},{"value":"doesnotcontain"} ,{"value":"equals"}, {"value":"endswith"},{"value":"startswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 118,          
+                   "ColumnWidth": 300,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":""           
                  }
+
+
                  ]';
             END;
             PRINT 'Transaction';
@@ -3668,9 +3929,9 @@ AS
                    "SortOrder": 2,          
                    "ColumnWidth": 200,          
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}],
-			   "Description":""           
-                 },        
-     {          
+			   "Description":""         
+			   },        
+				 {          
                    "TemplateEntity": "TransactionItem",          
                    "Column": "Alias",          
                    "DataType": "MultiSelect",          
@@ -4206,7 +4467,7 @@ AS
                    "OperatorList": [{"value":"equals"},{"value":"notequals"},{"value":"between"},{"value":"greaterthan"},{"value":"lessthan"},{"value":"greaterthanorequal"},{"value":"lessthanorequal"}],          
                   "AggregationList":[{"value":""},{"value":"groupby"},{"value":"count"},{"value":"sum"},{"value":"average"},{"value":"min"},{"value":"max"}],           
                    "SortOrder": 39,          
-                   "ColumnWidth": 200    
+                   "ColumnWidth": 200    ,
 				     "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}],
 					 "Description":""        
                  },          
@@ -4790,11 +5051,12 @@ AS
                   {          
                    "TemplateEntity": "TransactionItem",          
                  "Column": "Code",          
-                   "DataType": "String",          
-                   "ProcessingMethod": null,          
-                   "Operator": "contains",          
+                   "DataType": "multiselect",
+				    "Parent": "Type", 
+                   "ProcessingMethod": "RpTblTransactionCode",          
+                   "Operator": "in",          
                    "Aggregation": "",          
-                    "OperatorList":[{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                    "OperatorList":[{"value":"in"}],          
                        "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
                    "SortOrder": 81,          
                    "ColumnWidth": 300,          
@@ -5080,12 +5342,123 @@ AS
                    "ColumnWidth": 300,          
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
 			   "Description":""           
-                 }        
+                 }  ,
+				 
+				 {          
+                   "TemplateEntity": "TransactionItem",          
+                   "Column": "CustomerId",          
+                   "DataType": "Number",          
+                   "ProcessingMethod": null,          
+                   "Operator": "equals",          
+                   "Aggregation": "",          
+                   "OperatorList": [{"value":"equals"},{"value":"notequals"},{"value":"between"},{"value":"greaterthan"},{"value":"lessthan"},{"value":"greaterthanorequal"},{"value":"lessthanorequal"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"},{"value":"sum"},{"value":"average"},{"value":"min"},{"value":"max"}],            
+                   "SortOrder": 102,          
+                   "ColumnWidth": 200,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}],
+			   "Description":""           
+                 },
+				 
+				 {          
+                   "TemplateEntity": "TransactionItem",          
+                   "Column": "Last6OfSSN",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 103,          
+                   "ColumnWidth": 200,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":"Last 6 Of SSN"           
+                 } ,
+				  {          
+                   "TemplateEntity": "TransactionItem",          
+                   "Column": "PONumber",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 104,          
+                   "ColumnWidth": 200,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":"PO Number"           
+                 } ,
+				  {          
+                   "TemplateEntity": "TransactionItem",          
+                   "Column": "Extra1",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 114,          
+                   "ColumnWidth": 200,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":"Extra 1"           
+                 } ,
+				 {          
+                   "TemplateEntity": "TransactionItem",          
+                   "Column": "Extra2",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 105,          
+                   "ColumnWidth": 200,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":"Extra 2"           
+                 } ,
+				 {          
+                   "TemplateEntity": "TransactionItem",          
+                   "Column": "Extra3",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 106,          
+                   "ColumnWidth": 200,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":"Extra 3"           
+                 } ,
+				 {          
+                   "TemplateEntity": "TransactionItem",          
+                   "Column": "Extra4",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 107,          
+                   "ColumnWidth": 200,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":"Extra 4"           
+                 } ,          
+                 {          
+                   "TemplateEntity": "TransactionItem",          
+                   "Column": "Phone",          
+                   "DataType": "String",          
+                   "ProcessingMethod": null,          
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":[{"value":"contains"},{"value":"doesnotcontain"} ,{"value":"equals"}, {"value":"endswith"},{"value":"startswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 108,          
+                   "ColumnWidth": 300,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":""           
+                 }
+
               
                  ]';
             END;
+
             PRINT 'TransactionItem';
             --Assignment template          
+
             BEGIN
                 EXEC dbo.SpReportTemplateColumnIns @Json = '[          
                  {          
@@ -5992,6 +6365,7 @@ AS
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}],
 			   "Description":""           
                  } 
+
                ]';
             END;
             PRINT 'Assignment';
@@ -6789,6 +7163,34 @@ AS
                    "ColumnWidth": 300,          
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
 			   "Description":""           
+                 } ,
+				 {          
+                   "TemplateEntity": "paymentTax",          
+                   "Column": "IsResident",          
+                   "DataType": "String",          
+                   "ProcessingMethod": null,          
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                  "OperatorList":[{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                    "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 54,          
+                   "ColumnWidth": 300,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}],
+			   "Description":""           
+                 },
+
+				 {          
+                   "TemplateEntity": "paymentTax",          
+                   "Column": "Last6OfSSN",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 55,          
+                   "ColumnWidth": 300,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":""           
                  } 
                ]';
             END;
@@ -7277,20 +7679,7 @@ AS
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
 			   "Description":""           
                  },           
-                  {          
-                   "TemplateEntity": "payment",          
-                   "Column": "Customer",          
-                    "DataType": "MultiSelect",          
-                   "ProcessingMethod": "RpTblOrganization",          
-                   "Operator": "in",          
-                   "Aggregation": "",          
-                   "OperatorList":   [{"value":"in"}],          
-                   "AggregationList":[{"value":""},{"value":"groupby"},{"value":"count"}],          
-                   "SortOrder": 34,          
-                   "ColumnWidth": 200,          
-               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
-			   "Description":""           
-                 },          
+                      
                  {          
                    "TemplateEntity": "payment",          
                    "Column": "FirstName",          
@@ -7542,7 +7931,7 @@ AS
                    "ColumnWidth": 300,          
 					"GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
 					"Description":""           
-                 },
+                 }    ,
 				 {          
                    "TemplateEntity": "payment",          
                    "Column": "Phone",          
@@ -7556,7 +7945,20 @@ AS
                    "ColumnWidth": 300,          
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}],
 			   "Description":""           
-                 }
+                 },
+				 {          
+                   "TemplateEntity": "payment",          
+                   "Column": "Last6OfSSN",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 54,          
+                   "ColumnWidth": 300,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":""           
+                 }   
                ]';
             END;
             PRINT 'Payment';
@@ -7764,10 +8166,10 @@ AS
                   {          
                    "TemplateEntity": "TransactionItemSalesTax",          
                    "Column": "Rate",          
-                   "DataType": "MoneyFour",          
+                   "DataType": "Decimal",          
                    "ProcessingMethod": null,          
                    "Operator": "equals",          
-                   "Aggregation": "sum",          
+                   "Aggregation": "",          
                 "OperatorList": [{"value":"equals"},{"value":"notequals"},{"value":"between"},{"value":"greaterthan"},{"value":"lessthan"},{"value":"greaterthanorequal"},{"value":"lessthanorequal"}],          
                   "AggregationList":[{"value":""},{"value":"groupby"},{"value":"count"},{"value":"sum"},{"value":"average"},{"value":"min"},{"value":"max"}],           
                    "SortOrder": 14,          
@@ -7930,11 +8332,107 @@ AS
                    "ColumnWidth": 300,          
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
 			   "Description":""           
+                 } ,
+
+				 {          
+                   "TemplateEntity": "TransactionItemSalesTax",          
+                   "Column": "CustomerId",          
+                   "DataType": "Number",          
+                   "ProcessingMethod": null,          
+                   "Operator": "equals",          
+                   "Aggregation": "",          
+                   "OperatorList": [{"value":"equals"},{"value":"notequals"},{"value":"between"},{"value":"greaterthan"},{"value":"lessthan"},{"value":"greaterthanorequal"},{"value":"lessthanorequal"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"},{"value":"sum"},{"value":"average"},{"value":"min"},{"value":"max"}],            
+                   "SortOrder": 26,          
+                   "ColumnWidth": 200,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}],
+			   "Description":""           
+                 },
+
+				 {          
+                   "TemplateEntity": "TransactionItemSalesTax",          
+                   "Column": "Last6OfSSN",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 27,          
+                   "ColumnWidth": 200,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":"Last 6 Of SSN"           
+                 } ,
+				  {          
+                   "TemplateEntity": "TransactionItemSalesTax",          
+                   "Column": "PONumber",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 28,          
+                   "ColumnWidth": 200,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":"PO Number"           
+                 } ,
+				  {          
+                   "TemplateEntity": "TransactionItemSalesTax",          
+                   "Column": "Extra1",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 29,          
+                   "ColumnWidth": 200,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":"Extra 1"           
+                 } ,
+				 {          
+                   "TemplateEntity": "TransactionItemSalesTax",          
+                   "Column": "Extra2",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 30,          
+                   "ColumnWidth": 200,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":"Extra 2"           
+                 } ,
+				 {          
+                   "TemplateEntity": "TransactionItemSalesTax",          
+                   "Column": "Extra3",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 31,          
+                   "ColumnWidth": 200,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":"Extra 3"           
+                 } ,
+				 {          
+                   "TemplateEntity": "TransactionItemSalesTax",          
+                   "Column": "Extra4",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 32,          
+                   "ColumnWidth": 200,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":"Extra 4"           
                  } 
+
 				 
                            
                  ]';
             END;
+
             PRINT 'TransactionItemSalesTax';
             ----         --CUO Payroll Taxes template          
             ----         BEGIN
@@ -10374,7 +10872,21 @@ AS
                    "ColumnWidth": 300,          
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
 			   "Description":""           
-                 }             
+                 }  ,
+				 {          
+                   "TemplateEntity": "paymentAccrual",          
+                   "Column": "Last6OfSSN",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 51,          
+                   "ColumnWidth": 300,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":""           
+                 }  
+
              ]' ;
             END;
             PRINT 'paymentAccrual';
@@ -11071,7 +11583,20 @@ AS
                    "ColumnWidth": 300,          
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}],
 			   "Description":""           
-                 }       
+                 }  ,
+				 {          
+                   "TemplateEntity": "PaymentBenefit",          
+                   "Column": "Last6OfSSN",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 47,          
+                   "ColumnWidth": 300,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":""           
+                 }  
                  ]';
             END;
             PRINT 'PaymentBenefit';
@@ -11797,7 +12322,22 @@ AS
                    "ColumnWidth": 300,          
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
 			   "Description":""           
-                 }                                                                  
+                 }    ,
+				 
+				 {          
+                   "TemplateEntity": "PaymentBank",          
+                   "Column": "Last6OfSSN",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 49,          
+                   "ColumnWidth": 300,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":""           
+                 }  
+
                  ]';
             END;
             PRINT 'PaymentBank';
@@ -12165,7 +12705,21 @@ AS
                    "ColumnWidth": 200,          
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
 			   "Description":""           
-                 }         
+                 }  ,
+				 {          
+                   "TemplateEntity": "WCCost",          
+                   "Column": "Last6OfSSN",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 25,          
+                   "ColumnWidth": 300,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":""           
+                 }  
+
      ]'         ;
             END;
             PRINT 'WCCost';
@@ -12891,7 +13445,21 @@ AS
                    "ColumnWidth": 300,          
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}],
 			   "Description":""           
-                 }                   
+                 },
+				 
+				 {          
+                   "TemplateEntity": "paymentDeduction",          
+                   "Column": "Last6OfSSN",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 51,          
+                   "ColumnWidth": 300,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":""           
+                 }   
                ]';
             END;
             PRINT 'paymentDeduction';
@@ -14090,12 +14658,31 @@ AS
                    "ColumnWidth": 200,          
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
 			   "Description":""           
-				}
+				},
+
+				
+{          
+                   "TemplateEntity": "WorkInjury",          
+                   "Column": "Last6OfSSN",          
+                   "DataType": "String",                         
+                   "Operator": "contains",          
+                   "Aggregation": "",          
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 25,          
+                   "ColumnWidth": 300,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":""           
+                 }  
                ]';
             END;
             PRINT 'WorkInjury';
 
-			  --TempJob Template
+
+
+
+
+            --TempJob Template
             BEGIN
                 EXEC dbo.SpReportTemplateColumnIns @Json = '[          
                 		   {          
@@ -14623,8 +15210,11 @@ AS
             END;
             PRINT 'TempJob';
 
+            DECLARE @AutomationUserPersonId INT = dbo.SfAutomationUserPersonIdGet ();
+            DECLARE @json1 NVARCHAR (MAX) = N' { "personId":' + CAST(@AutomationUserPersonId AS VARCHAR (MAX)) + N'}';
+            EXEC dbo.SpSessionContextTsk @Json = @json1;
 
-			  --Contact Template
+            --Contact Template
             BEGIN
                 EXEC dbo.SpReportTemplateColumnIns @Json = '[          
                 		  
@@ -14884,7 +15474,6 @@ AS
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}],
 			   "Description":""           
                  },
-
 				 {          
                    "TemplateEntity": "Contact",          
                    "Column": "RoleDepartment",          
@@ -14899,9 +15488,7 @@ AS
                    "ColumnWidth": 300,          
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
 			   "Description":""           
-                 },
-				 
-				 {          
+                 },{          
                    "TemplateEntity": "Contact",          
                    "Column": "PersonId",          
                    "DataType": "Number",          
@@ -14914,9 +15501,7 @@ AS
                    "ColumnWidth": 200,          
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
 			   "Description":""           
-                 },
-				 
-				 {          
+                 },{          
                    "TemplateEntity": "Contact",          
                    "Column": "CustomerId",          
                    "DataType": "Number",          
@@ -14929,9 +15514,7 @@ AS
                    "ColumnWidth": 200, 
 				   "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}],
                 "Description":"This is Id of customer"          
-                 },
-				 
-				 {          
+                 },{          
                    "TemplateEntity": "Contact",          
                    "Column": "CustomerInsertDate",          
                    "DataType": "Date",          
@@ -14944,9 +15527,7 @@ AS
                    "ColumnWidth": 200,          
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}],
 			   "Description":""           
-                 },
-				 
-				 {          
+                 },{          
                    "TemplateEntity": "Contact",          
                    "Column": "ContactInsertDate",          
                    "DataType": "Date",          
@@ -14959,9 +15540,7 @@ AS
                    "ColumnWidth": 200,          
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}],
 			   "Description":""           
-                 },
-				 
-				 {          
+                 },{          
                    "TemplateEntity": "Contact",          
                    "Column": "Entity",          
                    "DataType": "String",          
@@ -14977,8 +15556,6 @@ AS
                  }]';
             END;
             PRINT 'Contact';
-
-
             COMMIT TRANSACTION;
 
         END TRY
