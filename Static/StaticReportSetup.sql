@@ -21,6 +21,8 @@ GO
   modified: sasita 9/17/2021 added payrollregisterdetail report setup
   modified: sasita,pratigya,samiksha: 10/28/2021 added missing setups of standard reports
  --==================================================================
+   modified: sasita 02/03/2023 updated setup of HowHeardOf as per USER STORY 41592
+ --==================================================================
        -- Send report category property and value from here for each report to assign the category   
        -- if not send, Uncategorized category will be assigned     
      eg: {        
@@ -6090,7 +6092,6 @@ AS
             SELECT @rptParam = '{"report":{"edit":"ReportDetail",        
            "reportId":0,        
            "report":"CustomerSetup",
-		     "reportTitle":"Customer Setup",
 		    "category":' + CAST(@CustomerListItemId AS VARCHAR (MAX))
                                + ',
            "status":"active",        
@@ -6126,6 +6127,254 @@ AS
             SELECT 'CustomerSetup';
 
 
+
+            --ACA
+            SELECT @rptParam = '{"report":{"edit":"ReportDetail",
+"reportId":0,
+"report":"ACA",
+"status":"active",
+"description":"This report gives the employee pay hours of each month for the year selected.",
+"processingMethod": "RpACAStatic",
+ "categoryListItemId":' + CAST(@GrossProfitTransactionListItemId AS VARCHAR (MAX))
+                               + ',
+"status":"active",
+"reportOptionListItemId":' + CAST(@GrossProfitTransactionListItemId AS VARCHAR (MAX))
+                               + '
+},
+
+"column":{"edit":"ReportProperty",
+"reportId":0,
+"columnValueData":[	
+
+ {"reportColumnId":0,"column":"Company","alias":"Company","aggregation":"groupby","isGroupped":1,"groupOrder":1,
+ "dataTypeListItemId":' + CAST(@StringListItemId AS VARCHAR (MAX))
+                               + '},
+	
+
+ {"reportColumnId":0,"column":"Office","alias":"Office","aggregation":"groupby","isGroupped":1,"groupOrder":2,
+ "dataTypeListItemId":' + CAST(@StringListItemId AS VARCHAR (MAX))
+                               + '},
+
+{"reportColumnId":0,"column":"DateOfBirth","alias":"Date Of Birth","aggregation":"",
+ "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
+                               + '},
+{"reportColumnId":0,"column":"HiredDate","alias":"Hired Date","aggregation":"",
+ "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
+                               + '},
+
+{"reportColumnId":0,"column":"RehiredDate","alias":"Rehired Date","aggregation":"",
+ "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
+                               + '},
+{"reportColumnId":0,"column":"TermDate","alias":"Term Date","aggregation":"",
+ "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
+                               + '},
+{"reportColumnId":0,"column":"JanuaryTotalHours","alias":"January Total Hours","aggregation":"sum",
+ "dataTypeListItemId":' + CAST(@DecimalListItemId AS VARCHAR (MAX))
+                               + '},
+{"reportColumnId":0,"column":"FebruaryTotalHours","alias":"February Total Hours","aggregation":"sum",
+ "dataTypeListItemId":' + CAST(@DecimalListItemId AS VARCHAR (MAX))
+                               + '},
+{"reportColumnId":0,"column":"MarchTotalHours","alias":"March Total Hours","aggregation":"sum",
+ "dataTypeListItemId":' + CAST(@DecimalListItemId AS VARCHAR (MAX))
+                               + '},
+{"reportColumnId":0,"column":"AprilTotalHours","alias":"April Total Hours","aggregation":"sum",
+ "dataTypeListItemId":' + CAST(@DecimalListItemId AS VARCHAR (MAX))
+                               + '},
+{"reportColumnId":0,"column":"MayTotalHours","alias":"May Total Hours","aggregation":"sum",
+ "dataTypeListItemId":' + CAST(@DecimalListItemId AS VARCHAR (MAX))
+                               + '},
+{"reportColumnId":0,"column":"JuneTotalHours","alias":"June Total Hours","aggregation":"sum",
+ "dataTypeListItemId":' + CAST(@DecimalListItemId AS VARCHAR (MAX))
+                               + '},
+{"reportColumnId":0,"column":"JulyTotalHours","alias":"July Total Hours","aggregation":"sum",
+ "dataTypeListItemId":' + CAST(@DecimalListItemId AS VARCHAR (MAX))
+                               + '},
+{"reportColumnId":0,"column":"AugustTotalHours","alias":"August Total Hours","aggregation":"sum",
+ "dataTypeListItemId":' + CAST(@DecimalListItemId AS VARCHAR (MAX))
+                               + '},
+
+{"reportColumnId":0,"column":"SeptemberTotalHours","alias":"September Total Hours","aggregation":"sum",
+ "dataTypeListItemId":' + CAST(@DecimalListItemId AS VARCHAR (MAX))
+                               + '},
+{"reportColumnId":0,"column":"OctoberTotalHours","alias":"October Total Hours","aggregation":"sum",
+ "dataTypeListItemId":' + CAST(@DecimalListItemId AS VARCHAR (MAX))
+                               + '},
+{"reportColumnId":0,"column":"NovemberTotalHours","alias":"November Total Hours","aggregation":"sum",
+ "dataTypeListItemId":' + CAST(@DecimalListItemId AS VARCHAR (MAX))
+                               + '},
+{"reportColumnId":0,"column":"DecemberTotalHours","alias":"December Total Hours","aggregation":"sum",
+ "dataTypeListItemId":' + CAST(@DecimalListItemId AS VARCHAR (MAX))
+                               + '},
+
+{"reportColumnId":0,"column":"TotalHoursForYear","alias":"Total Hours For Year","aggregation":"sum",
+ "dataTypeListItemId":' + CAST(@DecimalListItemId AS VARCHAR (MAX))
+                               + '}
+
+	  ],
+
+   "parameterValueData":[  
+  
+
+   {"reportParameterId":0,        
+              "description":"Date Type",        
+               "column":"DateType",         
+               "processingMethod":"RpTblDateType",        
+               "operator":"equal",         
+               "sortOrder":1,        
+         "required":1,        
+         "dataTypeListItemId":' + CAST(@SelectListItemId AS VARCHAR (MAX))
+                               + '},
+
+  {"reportParameterId":0,        
+         "description":"Year",        
+           "column":"Year",         
+         "operator":"equals",  
+		  "processingMethod":"RpTblYear",
+         "sortOrder":2,        
+         "required":1,        
+         "dataTypeListItemId":' + CAST(@SelectListItemId AS VARCHAR (MAX))
+                               + '},
+
+				     
+
+		 {"reportParameterId":0,
+									 "description":"Company",
+									  "column":"Company", 
+									  "processingMethod":"RpTblTenantOrganization",
+									  "operator":"in", 
+									  "sortOrder":4,
+								      "required":0,
+								      "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX))
+                               + '},
+
+		{"reportParameterId":0,        
+              "description":"Office",        
+               "column":"Office",         
+               "processingMethod":"RpTblOffice",        
+         "parent": "Company",        
+               "operator":"in",         
+               "sortOrder":5,        
+         "required":0,        
+         "dataTypeListItemId":' + CAST(@MultiSelectListItemId AS VARCHAR (MAX)) + '} 
+
+		 ],
+
+ 
+"personIds":"' + CAST(@personIds AS VARCHAR (MAX)) + '"}';
+            EXEC dbo.SpStaticReportIns @Json = @rptParam;
+            SELECT 'ACA';
+
+
+
+            -- PurchaseOrderNumber Report          
+            SELECT @rptParam = '{"report":{"edit":"ReportDetail",        
+           "reportId":0,        
+           "report":"PurchaseOrderNumber",        
+           "status":"active",        
+           "description":"This report gives customers PO numbers and balances with their expiration dates.",         
+           "processingMethod": "RpPurchaseOrderNumberStatic",   
+		    "categoryListItemId":' + CAST(@CustomerListItemId AS VARCHAR (MAX))
+                               + ',
+            "status":"active" ,
+			"reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
+                               + '
+            },        
+        
+      "column":{"edit":"ReportProperty",        
+       "reportId":0,        
+        
+        "columnValueData":[        
+       
+		 {"reportColumnId":0,"column":"POValue","alias":"PO Value","aggregation":"sum",        
+         "dataTypeListItemId":' + CAST(@MoneyListItemId AS VARCHAR (MAX))
+                               + '}        
+          ,        
+           {"reportColumnId":0,"column":"AmountLeft","alias":"Amount Left","aggregation":"sum",        
+         "dataTypeListItemId":' + CAST(@MoneyListItemId AS VARCHAR (MAX))
+                               + '}        
+          ,        
+           {"reportColumnId":0,"column":"WarningAmount","alias":"Warning Amount","aggregation":"sum",        
+         "dataTypeListItemId":' + CAST(@MoneyListItemId AS VARCHAR (MAX))
+                               + '}        
+          ,        
+           {"reportColumnId":0,"column":"AmountUsed","alias":"Amount Used","aggregation":"sum",        
+         "dataTypeListItemId":' + CAST(@MoneyListItemId AS VARCHAR (MAX))
+                               + '}        
+          ,        
+          
+							   {"reportColumnId":0,"column":"InsertDate","alias":"Insert Date","aggregation":"",        
+         "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
+                               + '} ,
+							   {"reportColumnId":0,"column":"ExpirationDate","alias":"Expiration Date","aggregation":"",        
+         "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
+                               + '} 
+        
+        ],        
+        
+      "parameterValueData":[        
+         
+							  {"reportParameterId":0,        
+         "description":"Insert Date From",        
+           "column":"InsertDateFrom",         
+         "operator":"greaterthanorequal",         
+         "sortOrder":1,        
+         "required":1,        
+         "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
+                               + '},
+								   {"reportParameterId":0,        
+         "description":"Insert Date To",        
+           "column":"InsertDateTo",         
+         "operator":"lessthanorequal",         
+         "sortOrder":2,        
+         "required":1,        
+         "dataTypeListItemId":' + CAST(@DateListItemId AS VARCHAR (MAX))
+                               + '},
+                    
+               
+           {"reportParameterId":0,        
+          "description":"Customer",        
+           "column":"Customer",         
+           "processingMethod":"",        
+           "operator":"contains",         
+           "sortOrder":3,        
+              "required":0,        
+              "dataTypeListItemId":' + CAST(@StringListItemId AS VARCHAR (MAX))
+                               + '}  ]        
+        },        
+        
+        "personIds":"' + CAST(@personIds AS VARCHAR (MAX)) + '"}';
+            EXEC dbo.SpStaticReportIns @Json = @rptParam;
+            SELECT 'PurchaseOrderNumber';
+
+            --ReportSubscriptionList Report    done   
+
+            SELECT @rptParam = '{"report":{"edit":"ReportDetail",        
+           "reportId":0,        
+           "report":"ReportSubscriptionList",        
+           "status":"active",        
+           "description":"Report that shows a full list of all the report subscriptions",         
+           "processingMethod": "RpReportSubscriptionListStatic",
+		    "categoryListItemId":' + CAST(@UnCategorizedListItemId AS VARCHAR (MAX))
+                               + ',
+            "status":"active",
+			"reportOptionListItemId":' + CAST(@ReportOptionShareableListItemId AS VARCHAR (MAX))
+                               + '
+
+            },        
+        
+      "column":{"edit":"ReportProperty",        
+       "reportId":0,        
+        
+        "columnValueData":[],        
+        
+               
+       "parameterValueData":[]        
+                  
+          },        
+        
+        "personIds":"' + CAST(@personIds AS VARCHAR (MAX)) + '"}';
+            EXEC dbo.SpStaticReportIns @Json = @rptParam;
+            SELECT 'ReportSubscriptionList';
 
 
 

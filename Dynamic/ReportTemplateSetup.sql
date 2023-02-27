@@ -14292,7 +14292,7 @@ AS
             END;
             PRINT 'ARPayment';
             --Work Injury Template
-            BEGIN
+             BEGIN
                 EXEC dbo.SpReportTemplateColumnIns @Json = '[          
                  {          
                    "TemplateEntity": "WorkInjury",          
@@ -14673,9 +14673,23 @@ AS
                    "ColumnWidth": 300,          
                "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
 			   "Description":""           
-                 }  
+                 },
+				 
+				  {          
+                   "TemplateEntity": "WorkInjury",          
+                   "Column": "OSHAReportable",          
+                   "DataType": "string",                          
+                   "Operator": "contains",          
+                       "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "OperatorList":  [{"value":"equals"},{"value":"notequals"},{"value":"contains"},{"value":"doesnotcontain"},{"value":"startswith"},{"value":"endswith"}],                          "AggregationList": [{"value":""},{"value":"groupby"},{"value":"count"}],            
+                   "SortOrder": 26,          
+                   "ColumnWidth": 300,          
+               "GrouppingSortOrderList":[{"value":""},{"value":"asc"},{"value":"desc"}], 
+			   "Description":"OSHA Reportable"           
+                 }
                ]';
             END;
+
             PRINT 'WorkInjury';
 
 
