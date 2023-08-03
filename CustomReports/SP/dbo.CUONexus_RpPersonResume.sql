@@ -18,7 +18,7 @@ GO
 -- Modification Date: 7/26/2022     
 -- Desciption: temp table #workhistory employer column size 50 to 100     
 -- =============================================  
---created by: samiksha Poudel on 8/1/2023, custom resume for Nexus, added prefix,suffix, middleinitial, lastinitial, city, state, zipcode 
+--created by: samiksha Poudel on 8/1/2023, custom person resume for Nexus, added prefix,suffix(By Anuj), middleinitial, lastinitial, city, state, zipcode , removed address from Address (Anuj)
 ALTER PROCEDURE [dbo].[CUONexus_RpPersonResume]
 (
     @Json VARCHAR (MAX) OUTPUT ) --= 2000055)        
